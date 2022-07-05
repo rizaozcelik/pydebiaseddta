@@ -10,6 +10,10 @@ Repo to debias any drug-target affinity prediction model via DebiasedDTA.
 Contents
 --------
 
+.. autosummary::
+   :toctree: _autosummary
+   :recursive:
+   
 .. toctree::
 
    usage
