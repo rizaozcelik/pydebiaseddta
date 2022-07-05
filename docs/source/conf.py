@@ -1,8 +1,13 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
+import os
+import sys
 
-project = 'Pydebiaseddta'
+sys.path.insert(0, os.path.abspath('../pydebiaseddta/pydebiaseddta'))
+
+
+project = 'pydebiaseddta'
 copyright = '2022, Rıza Özçelik'
 author = 'Rıza Özçelik'
 
@@ -33,3 +38,6 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+
+
+app.srcdir = './pydebiaseddta/pydebiaseddta'
