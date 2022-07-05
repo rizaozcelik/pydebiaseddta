@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Pydebiaseddta'
+copyright = '2022, Rıza Özçelik'
+author = 'Rıza Özçelik'
 
 release = '0.1'
 version = '0.1.0'
