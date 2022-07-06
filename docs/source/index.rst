@@ -21,3 +21,5 @@ Contents
 
    usage
    api
+
+   API reference <_autosummary/pydebiaseddta>
