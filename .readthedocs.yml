@@ -7,13 +7,13 @@ build:
 
 sphinx:
   fail_on_warning: true
-  # configuration: ./docs/source/conf.py
+  configuration: ./docs/source/conf.py
 
 python:
   install:
-    - method: pip
+    - method: pip3
       path: .
-    # - requirements: ./docs/requirements.txt
+    - requirements: ./docs/requirements.txt
 
 formats:
   - pdf
