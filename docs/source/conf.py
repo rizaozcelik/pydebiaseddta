@@ -17,8 +17,8 @@ version = '0.1.0'
 # -- General configuration
 
 extensions = [
+    'sphinx.ext.napoleon',
     'sphinx.ext.doctest',
-    'sphinxcontrib.napoleon',
     'sphinx.ext.autodoc',
     'sphinx-autodoc-typehints',
     'sphinx.ext.autosummary',
