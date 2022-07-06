@@ -9,11 +9,11 @@ sphinx:
   fail_on_warning: true
 
 python:
+  version: "3.9.7"
   install:
     - method: pip
       path: .
-
-requirements_file: ./requirements.txt
+    - requirements: ./requirements.txt
 
 formats:
   - pdf
