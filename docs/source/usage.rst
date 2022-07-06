@@ -8,6 +8,5 @@ Installation
 
 The Installation guidelines will follow.
 
-.. autofunction:: pydebiaseddta.utils.utils.load_sample_smiles
+.. autofunction:: pydebiaseddta.utils.load_sample_smiles
 
-    
