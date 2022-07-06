@@ -18,10 +18,10 @@ version = '0.1.0'
 
 extensions = [
     'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
+    'sphinxcontrib.napoleon',
+    # 'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.napoleon',
 ]
 
 intersphinx_mapping = {
@@ -38,3 +38,22 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+napoleon_include_private_with_doc = True
+napoleon_include_special_with_doc = True
+
+# If True, docstring sections will use the ".. admonition::" directive.
+# If False, docstring sections will use the ".. rubric::" directive.
+# One may look better than the other depending on what HTML theme is used.
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+
+# -- Autodoc configuration -----------------------------------------------------
+autoclass_content = 'class'
+
+autodoc_member_order = 'bysource'
+
+autodoc_default_flags = ['members']

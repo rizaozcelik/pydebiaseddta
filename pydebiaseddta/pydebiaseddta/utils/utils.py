@@ -1,3 +1,4 @@
+from typing import Dict
 import json
 from .. import package_path
 
@@ -18,7 +19,17 @@ def load_sample_smiles():
         return [line.strip() for line in f.readlines()]
 
 
-def save_json(obj, path):
+def save_json(obj: Dict, path: str):
+    """A utility function to save dictionaries in json. 
+    The indent is set to 4 for readability.
+
+    Parameters
+    ----------
+    obj : Dict
+        Dictionary to save
+    path : str
+        Path to store the .json file
+    """    
     with open(path, "w") as f:
         json.dump(obj, f, indent=4)
 
