@@ -7,12 +7,12 @@ build:
 
 sphinx:
   fail_on_warning: true
-  configuration: docs/conf.py
+  configuration: docs/source/conf.py
 
 python:
   install:
     - method: pip
-      path: ./pydebiaseddta/pydebiaseddta
+      path: .
     - requirements: ./docs/requirements.txt
 
 formats:
