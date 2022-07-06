@@ -16,14 +16,23 @@ version = '0.1.0'
 
 # -- General configuration
 
+# extensions = [
+#     # 'sphinx.ext.napoleon',
+#     'sphinx.ext.doctest',
+#     'sphinx.ext.autodoc',
+#     # 'sphinx-autodoc-typehints',
+#     'sphinx.ext.autosummary',
+#     'sphinx.ext.intersphinx',
+# ]
+
 extensions = [
-    # 'sphinx.ext.napoleon',
+    'sphinx.ext.duration',
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
-    # 'sphinx-autodoc-typehints',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
 ]
+
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
