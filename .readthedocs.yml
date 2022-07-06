@@ -18,4 +18,3 @@ requirements_file: ./requirements.txt
 formats:
   - pdf
   - epub
-Footer
