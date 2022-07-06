@@ -11,6 +11,8 @@ sphinx:
 
 python:
   install:
+    - method: pip
+      path: ./pydebiaseddta/pydebiaseddta
     - requirements: ./docs/requirements.txt
 
 formats:
