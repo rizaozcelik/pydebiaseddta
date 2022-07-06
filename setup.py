@@ -8,6 +8,7 @@ setup(
     author="Rıza Özçelik",
     author_email="riza.ozcelik@boun.edu.tr",
     license="MIT",
+    python_requires='==3.9.7',
     install_requires=[
         "numpy==1.21.2",
         "scikit_learn==1.1.1",
