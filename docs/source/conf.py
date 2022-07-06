@@ -18,7 +18,7 @@ version = '0.1.0'
 
 extensions = [
     'sphinx.ext.doctest',
-    'sphinxcontrib.napoleon',
+    'sphinx.ext.napoleon',
     # 'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
