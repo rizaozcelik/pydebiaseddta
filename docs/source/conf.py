@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath("../../pydebiaseddta"))
 # sys.path.insert(0, os.path.abspath('../../pydebiaseddta/pydebiaseddta/utils'))
 
 
-project = "Pain"
+project = "pydebiaseddta"
 copyright = "2022, Rıza Özçelik"
 author = "Rıza Özçelik"
 
@@ -21,7 +21,6 @@ version = "0.1.0"
 # -- General configuration
 
 # extensions = [
-#     # 'sphinx.ext.napoleon',
 #     'sphinx.ext.doctest',
 #     'sphinx.ext.autodoc',
 #     # 'sphinx-autodoc-typehints',
@@ -38,6 +37,7 @@ version = "0.1.0"
 # ]
 
 extensions = [
+    'sphinx.ext.napoleon',
     "sphinx.ext.autodoc",  # Core Sphinx library for auto html doc generation from docstrings
     "sphinx.ext.autosummary",  # Create neat summary tables for modules/classes/methods etc
     "sphinx.ext.intersphinx",  # Link to other project's documentation (see mapping below)
@@ -57,7 +57,6 @@ html_show_sourcelink = (
 )
 autodoc_inherit_docstrings = True  # If no docstring, inherit from base class
 set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_typehints
-# autodoc_typehints = "description" # Sphinx-native method. Not as good as sphinx_autodoc_typehints
 add_module_names = False  # Remove namespaces from class/method signatures
 
 
@@ -71,19 +70,19 @@ templates_path = ["_templates"]
 # html_theme = "sphinx_rtd_theme"
 
 # -- Options for EPUB output
-# epub_show_urls = "footnote"
+epub_show_urls = "footnote"
 
-# napoleon_google_docstring = True
-# napoleon_numpy_docstring = True
-# napoleon_include_private_with_doc = True
-# napoleon_include_special_with_doc = True
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+napoleon_include_private_with_doc = True
+napoleon_include_special_with_doc = True
 
-# # -- Autodoc configuration -----------------------------------------------------
-# autoclass_content = 'class'
+# -- Autodoc configuration -----------------------------------------------------
+autoclass_content = 'class'
 
-# autodoc_member_order = 'bysource'
+autodoc_member_order = 'bysource'
 
-# autodoc_default_flags = ['members']
+autodoc_default_flags = ['members']
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
