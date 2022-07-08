@@ -1,5 +1,5 @@
 **__pycache__
-docs/build/*
-docs/source/generated/*
+docs/_build/*
+docs/_autosummary/*
 dist/*
 **.egg-info/
