@@ -143,6 +143,35 @@ class DebiasedDTA:
         val_labels=None,
         coeffs_save_path=None,
     ):
+        """Train function for DebiasedDTA.
+
+        Parameters
+        ----------
+        train_chemicals : _type_
+            _description_
+        train_proteins : _type_
+            _description_
+        train_labels : _type_
+            _description_
+        val_chemicals : _type_, optional
+            _description_, by default None
+        val_proteins : _type_, optional
+            _description_, by default None
+        val_labels : _type_, optional
+            _description_, by default None
+        coeffs_save_path : _type_, optional
+            _description_, by default None
+
+        Returns
+        -------
+        _type_
+            _description_
+
+        Raises
+        ------
+        ValueError
+            _description_
+        """    
         train_chemicals = train_chemicals.copy()
         train_proteins = train_proteins.copy()
         if len(train_chemicals) != len(train_proteins):

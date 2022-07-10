@@ -5,24 +5,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 
 def ci(gold_truths: List[float], predictions: List[float]) -> float:
-    """ Compute concordance index between the expected values and predictions.
-    Concordance index is calculated via: 
-    
-    .. math::
-        \frac {1} {Z} \sum_{\delta_x > \delta_y} h (b_x - b_y)
-
-    where :math:`b_x` is the prediction for the larger affinity :math:`\delta_x`, 
-    :math:`b_y` is the prediction for the smaller affinity :math:`\delta_y`, 
-    :math:`Z` is a normalization constant,
-    :math:`h(m)` is the step function.
-
-    Args:
-        gold_truths (List[float]): The gold labels in the dataset.  
-        predictions (List[float]): Predictions of a model.
-
-    Returns:
-        float: Concordance index.
-    """
     gold_combs, pred_combs = combinations(gold_truths, 2), combinations(predictions, 2)
     nominator, denominator = 0, 0
     for (g1, g2), (p1, p2) in zip(gold_combs, pred_combs):
@@ -81,8 +63,8 @@ def evaluate_predictions(
         gold_truths (List[float]): The gold labels in the dataset.  
         predictions (List[float]): Predictions of a model.
         metrics (List[str]): Name of the evaluation metrics to compute. 
-            The valid values are: {"ci", "r2", "rmse", "mse"}. 
-            All metrics are computed if no value is provided.
+        The valid values are: {"ci", "r2", "rmse", "mse"}. 
+        All metrics are computed if no value is provided.
     """
     if metrics is None:
         metrics = ["ci", "r2", "rmse", "mse"]

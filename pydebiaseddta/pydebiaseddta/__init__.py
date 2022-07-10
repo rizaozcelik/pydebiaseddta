@@ -1,3 +1,6 @@
+"""
+Docstring
+"""
 import pathlib
 
 _PACKAGE_PATH = str(pathlib.Path(__file__).parent.resolve())
