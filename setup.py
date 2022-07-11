@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pydebiaseddta",
-    version="0.0.1",
+    version="0.0.3",
     description="Python library to improve generalizability of the drug-target prediction models via DebiasedDTA",
     url="https://github.com/rizaozcelik/pydebiaseddta",
     author="Rıza Özçelik",
