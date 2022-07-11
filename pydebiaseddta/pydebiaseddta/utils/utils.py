@@ -27,14 +27,6 @@ def load_sample_smiles():
 
 
 def save_json(obj: Dict, path: str):
-    """
-    Return a list of random ingredients as strings.
-    
-    :param obj: Optional "kind" of ingredients.
-    :param path: Optional "kind" of ingredients.
-    :type obj: Dict
-    :type path: str
-    """
     with open(path, "w") as f:
         json.dump(obj, f, indent=4)
 
