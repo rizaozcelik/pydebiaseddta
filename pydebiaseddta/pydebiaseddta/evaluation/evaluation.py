@@ -104,6 +104,11 @@ def evaluate_predictions(
             Name of the evaluation metrics to compute. 
             Possible values are: {"ci", "r2", "rmse", "mse"}. 
             All metrics are computed if no value is provided.
+            
+    Returns
+    -------
+    Dict[str, float]
+        A dictionary that maps each metric name to the computed value.
     """
     if metrics is None:
         metrics = ["ci", "r2", "rmse", "mse"]
