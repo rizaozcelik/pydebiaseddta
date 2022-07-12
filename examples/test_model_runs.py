@@ -6,9 +6,7 @@ from pydebiaseddta.utils import load_sample_dta_data
 from pydebiaseddta.evaluation import evaluate_predictions
 
 # %%
-train_chemicals, train_proteins, train_labels = load_sample_dta_data(
-    mini=True
-)["train"]
+train_chemicals, train_proteins, train_labels = load_sample_dta_data(mini=True)["train"]
 # %%
 bpedta = BPEDTA(n_epochs=2)
 bpedta.train(train_chemicals, train_proteins, train_labels)
@@ -26,4 +24,5 @@ debiaseddta_id = DebiasedDTA(IDDTA, DeepDTA, predictor_params={"n_epochs": 2})
 debiaseddta_id.train(train_chemicals, train_proteins, train_labels)
 # %%
 preds = lmdta.predict(train_chemicals, train_proteins)
-scores = evaluate_predictions(train_labels, preds, metrics=['ci', 'mse'])
+scores = evaluate_predictions(train_labels, preds, metrics=["ci", "mse", "r2"])
+# %%
