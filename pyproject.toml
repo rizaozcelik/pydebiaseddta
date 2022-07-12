@@ -1,11 +1,42 @@
+[project]
+name = "pydebiaseddta"
+version="0.0.4"
+authors = [
+    {name = "Rıza Özçelik", email = "riza.ozcelik@boun.edu.tr"}
+]
+description = "Python library to improve generalizability of the drug-target prediction models via DebiasedDTA"
+readme = "README.rst"
+license= { file="LICENSE"}
+requires-python = ">=3.9.7"
+dependencies = [
+    "numpy==1.21.2",
+    "scikit_learn==1.1.1",
+    "tensorflow==2.7.0",
+    "tokenizers==0.10.3",
+    "transformers==4.14.1",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "machine learning",
+    "computational drug discovery",
+    "cheminformatics",
+    "debiasing",
+    "affinity prediction",
+    "debiaseddta",
+]
+
+[project.urls]
+"Homepage"="https://pydebiaseddta.readthedocs.io/en/latest/"
+"GitHub"="https://github.com/rizaozcelik/pydebiaseddta"
+
+
 [build-system]
 requires = [
     "setuptools>=61.0",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
-
-[project]
-name = "pydebiaseddta"
-authors = [{name = "Rıza Özçelik", email = "riza.ozcelik@boun.edu.tr"}]
-dynamic = ["version", "description"]

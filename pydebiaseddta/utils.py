@@ -1,6 +1,6 @@
 from typing import Dict
 import json
-from .. import package_path
+from . import package_path
 
 
 def load_sample_dta_data(mini=False):

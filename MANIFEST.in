@@ -1,6 +1,6 @@
 include README.rst
-include pydebiaseddta/pydebiaseddta/data/dta/*
-include pydebiaseddta/pydebiaseddta/data/sequence/*
-include pydebiaseddta/pydebiaseddta/data/word_identification/chemical/*
-include pydebiaseddta/pydebiaseddta/data/word_identification/protein/*
-include pydebiaseddta/pydebiaseddta/data/word_identification/chemical_mini_test.json
+include pydebiaseddta/data/dta/*
+include pydebiaseddta/data/sequence/*
+include pydebiaseddta/data/word_identification/chemical/*
+include pydebiaseddta/data/word_identification/protein/*
+include pydebiaseddta/data/word_identification/chemical_mini_test.json
