@@ -14,12 +14,28 @@ __REGEXES = {
     "segmentation_sq": rf"(\[|\]|{_ELEMENTS_STR}|"
     + r"\(|\)|\.|=|#|-|\+|\\\\|\/|:|~|@|\?|>|\*|\$|\%\d{2}|\d)",
 }
-_RE_PATTERNS = {
-    name: re.compile(pattern) for name, pattern in __REGEXES.items()
-}
+_RE_PATTERNS = {name: re.compile(pattern) for name, pattern in __REGEXES.items()}
 
 
-def segment_smiles(smiles: str, segment_sq_brackets=True) -> List[str]:
+def segment_smiles(smiles: str, segment_sq_brackets: bool = True) -> List[str]:
+    """Segments a SMILES string into its tokens.
+
+    Parameters
+    ----------
+    smiles : str
+        Input SMILES string.
+    segment_sq_brackets : bool, optional
+        Whether to segment expressions within square brackets (*e.g.* [C@@H], [Rb]), too. 
+        Set to ``True`` to have square brackets and the tokens inside as standalone tokens,
+        *e.g.* ["[", "C", "@", "@", "H", "]"]. 
+        When set to ``False``, whole expression is returned as a single token, *e.g.* "[C@@H]" .
+        Defaults to ``True``.
+
+    Returns
+    -------
+    List[str]
+        Each element of the SMILES string as a list.
+    """
     regex = _RE_PATTERNS["segmentation_sq"]
     if not segment_sq_brackets:
         regex = _RE_PATTERNS["segmentation"]
@@ -29,16 +45,28 @@ def segment_smiles(smiles: str, segment_sq_brackets=True) -> List[str]:
 def segment_smiles_batch(
     smiles_batch: List[str], segment_sq_brackets=True
 ) -> List[List[str]]:
-    return [
-        segment_smiles(smiles, segment_sq_brackets) for smiles in smiles_batch
-    ]
+    """Segments multiple SMILES strings with a single call by wrapping ``sequence.smiles_processsing.segment_smiles``.
+
+    Parameters
+    ----------
+    smiles_batch : List[str]
+        List of input SMILES strings.
+    segment_sq_brackets : bool, optional
+        Whether to segment expressions within square brackets. 
+        See ``sequence.smiles_processsing.segment_smiles`` for a more detailed explanation.
+        Defaults to ``True``.
+
+    Returns
+    -------
+    List[List[str]]
+        A 2D list of strings where element `[i][j]` corresponds to the `j`th token of the `i`th input.
+    """
+    return [segment_smiles(smiles, segment_sq_brackets) for smiles in smiles_batch]
 
 
 def learn_unichar_encoding(smiles_corpus: List[str]) -> Dict:
     unichar_start_ix, unichar_end_ix = 33, 126
-    target_vocab = {
-        chr(ix) for ix in range(unichar_start_ix, unichar_end_ix + 1)
-    }
+    target_vocab = {chr(ix) for ix in range(unichar_start_ix, unichar_end_ix + 1)}
     vocab_size = len(target_vocab)
     segmented_corpus = segment_smiles_batch(smiles_corpus)
 
@@ -46,9 +74,7 @@ def learn_unichar_encoding(smiles_corpus: List[str]) -> Dict:
     token_counts = sum(token_counts_by_smi, Counter())
 
     if len(token_counts) > vocab_size:
-        source_vocab = [
-            token for token, count in token_counts.most_common(vocab_size)
-        ]
+        source_vocab = [token for token, count in token_counts.most_common(vocab_size)]
     else:
         source_vocab = list(token_counts.keys())
     source_to_target_mapping = {
@@ -78,9 +104,7 @@ def smiles_to_unichar(smiles: str, encoding=Union[str, Dict]) -> List[str]:
     if encoding is isinstance(encoding, str):
         encoding = load_json(encoding)
     segments = segment_smiles(smiles)
-    return "".join(
-        [encoding.get(segment, encoding["[OOV]"]) for segment in segments]
-    )
+    return "".join([encoding.get(segment, encoding["[OOV]"]) for segment in segments])
 
 
 def smiles_to_unichar_batch(
@@ -109,16 +133,5 @@ def unichar_to_smiles_batch(
     decoding = {v: k for k, v in encoding.items()}
 
     return [
-        "".join([decoding.get(char, char) for char in unichar])
-        for unichar in unichars
+        "".join([decoding.get(char, char) for char in unichar]) for unichar in unichars
     ]
-
-
-# %%
-if __name__ == "__main__":
-    with open("pydta/data/sequence/corpus.mini.smiles") as f:
-        examples = [line.strip() for line in f.readlines()]
-    segmented_examples = [segment_smiles(example) for example in examples]
-    assert [
-        "".join(segmented_example) for segmented_example in segmented_examples
-    ] == examples

@@ -3,11 +3,6 @@ from itertools import combinations
 
 from sklearn.metrics import mean_squared_error, r2_score
 
-    # where :math:`b_x` is the prediction for the larger affinity :math:`\delta_x`, 
-    # :math:`b_y` is the prediction for the smaller affinity :math:`\delta_y`, 
-    # :math:`Z` is a normalization constant,
-    # :math:`h(m)` is the step function. See `Gönen and Heller 2005 <https://www.jstor.org/stable/20441249#metadata_info_tab_contents>`_ for more details.
-    # :math:`\frac{1}{Z} \sum_{\delta_x > \delta_y} h(b_x - b_y)`    
 
 def ci(gold_truths: List[float], predictions: List[float]) -> float:
     """Computes concordance index (CI) between the expected values and predictions. 
