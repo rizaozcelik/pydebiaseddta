@@ -13,11 +13,11 @@ FILE_EXTENSION = ".json"
 
 class WordIdentifier:
     """A versatile class to identify biomolecule words in biomolecule strings. 
-    ``WordIdentifier`` leverages the Byte Pair Encoding algorithm implemented in the``tokenizers`` library
+    `WordIdentifier` leverages the Byte Pair Encoding algorithm implemented in the `tokenizers` library
     to learn biomolecule vocabularies and segment biomolecule strings into their words. 
     """    
     def __init__(self, vocab_size: int):
-        """Creates a ``WordIdentifier`` instance.
+        """Creates a `WordIdentifier` instance.
 
         Parameters
         ----------
@@ -30,17 +30,17 @@ class WordIdentifier:
 
     @classmethod
     def from_file(cls, loadpath: str):
-        """Loads a ``WordIdentifier`` from a file.
+        """Loads a `WordIdentifier` from a file.
 
         Parameters
         ----------
         loadpath : str
-            Path to the ``WordIdentifier`` file.
+            Path to the `WordIdentifier` file.
 
         Returns
         -------
         WordIdentifier
-            Previously saved ``WordIdentifier``
+            Previously saved `WordIdentifier`
         """        
         if not loadpath.endswith(FILE_EXTENSION):
             loadpath = loadpath + FILE_EXTENSION
@@ -94,7 +94,7 @@ class WordIdentifier:
         sequences : List[str]
             The List of biomolecule strings.
         padding_len : int, optional
-            The desired length of sequences, by default ``None``. No padding is applied when set to ``None``.
+            The desired length of sequences, by default `None`. No padding is applied when set to `None`.
 
         Returns
         -------
@@ -112,7 +112,7 @@ class WordIdentifier:
         return [encoding.ids for encoding in encodings]
 
     def save(self, savepath: str):
-        """Saves a ``WordIdentifier`` instance to disk.
+        """Saves a `WordIdentifier` instance to disk.
 
         Parameters
         ----------
@@ -136,12 +136,12 @@ def load_chemical_word_identifier(vocab_size: int) -> type[WordIdentifier]:
     Returns
     -------
     type[WordIdentifier]
-        The ``WordIdentifier`` instance used by the DTA models.
+        The `WordIdentifier` instance used by the DTA models.
 
     Raises
     ------
     ValueError
-        If vocabulary size besides 94 and 8000 is passed, a ``ValueError`` is raised.
+        If vocabulary size besides 94 and 8000 is passed, a `ValueError` is raised.
     """    
     if vocab_size not in [94, 8000]:
         raise ValueError("Supported vocab sizes are 94 and 8000")
@@ -166,12 +166,12 @@ def load_protein_word_identifier(vocab_size: int)-> type[WordIdentifier]:
     Returns
     -------
     type[WordIdentifier]
-        The ``WordIdentifier`` instance used by the DTA models.
+        The `WordIdentifier` instance used by the DTA models.
 
     Raises
     ------
     ValueError
-        If vocabulary size besides 26 and 32000 is passed, a ``ValueError`` is raised.
+        If vocabulary size besides 26 and 32000 is passed, a `ValueError` is raised.
     """    
     if vocab_size not in [26, 32000]:
         raise ValueError("Supported vocab sizes are 26 and 32000")

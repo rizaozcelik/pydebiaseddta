@@ -1,3 +1,4 @@
+from typing import Any, List
 import json
 from abc import ABC, abstractmethod
 
@@ -7,7 +8,22 @@ import tensorflow as tf
 from ..evaluation import evaluate_predictions
 
 
-def create_uniform_weights(n_samples: int, n_epochs: int):
+def create_uniform_weights(n_samples: int, n_epochs: int) -> List[np.array]:
+    """Create a lists of weights such that every training instance has the equal weight across all epoch, *i.e.*,
+    no sample weighting is used.
+
+    Parameters
+    ----------
+    n_samples : int
+        Number of training instances.
+    n_epochs : int
+        Number of epochs to train the model.
+
+    Returns
+    -------
+    List[np.array]
+        Sample weights across epochs. Each instance has a weight of 1 for all epochs.
+    """    
     return [np.array([1] * n_samples) for _ in range(n_epochs)]
 
 
@@ -15,20 +31,64 @@ tf.get_logger().setLevel("WARNING")
 
 
 class BasePredictor(ABC):
+    """An abstract class that implements the interface of a predictor in `pydebiaseddta`.
+    The predictors are characterized by `train` and `predict` functions, 
+    whose signatures are implemented by this class. 
+    Any instance of `BasePredictor` can be trained in the `DebiasedDTA` training framework,
+    and therefore, `BasePredictor` can be inherited to debias custom DTA prediction models.
+    """    
     @abstractmethod
     def train(
         self,
-        train_chemicals,
-        train_proteins,
-        train_labels,
-        val_chemicals=None,
-        val_proteins=None,
-        val_labels=None,
-    ):
+        train_chemicals: List[Any],
+        train_proteins: List[Any],
+        train_labels: List[float],
+        val_chemicals: List[Any]=None,
+        val_proteins: List[Any]=None,
+        val_labels: List[float]=None,
+        sample_weights_by_epoch: List[np.array]=None,
+    ) -> Any:
+        """An abstract method to train DTA prediction models. The input can be of any biomolecule representation,
+
+        Parameters
+        ----------
+        train_chemicals : List[Any]
+            The training chemicals as a List.
+        train_proteins : List[Any]
+            The training proteins as a List.
+        train_labels : List[float]
+            Affinity scores of the training protein-compound pairs
+        val_chemicals : List[Any], optional
+            Validation chemicals as a List, in case validation scores are measured during training, by default `None`
+        val_proteins : List[Any], optional
+            Validation proteins as a List, in case validation scores are measured during training, by default `None`
+        val_labels : List[float], optional
+            Affinity scores of validation protein-compound pairs as a List, in case validation scores are measured during training, by default `None`
+
+        Returns
+        -------
+        Any
+            The function is free to return any value after its training, including `None`.
+        """    
         pass
 
     @abstractmethod
-    def predict(self, chemicals, proteins):
+    def predict(self, chemicals: List[Any], proteins: List[Any]) -> List[float]:
+        """An abstract function to implement affinity prediction steps.
+        The inputs can be of any biomolecule representation type.
+
+        Parameters
+        ----------
+        chemicals : List[Any]
+            Chemicals as a List.
+        proteins : List[Any]
+            Proteins as List.
+
+        Returns
+        -------
+        List[float]
+            The affinity score predictions for the protein-chemical pairs as a List.
+        """        
         pass
 
 
