@@ -124,7 +124,7 @@ class WordIdentifier:
         save_json(json.loads(self.tokenizer.to_str()), savepath)
 
 
-def load_chemical_word_identifier(vocab_size: int) -> type[WordIdentifier]:
+def load_chemical_word_identifier(vocab_size: int) -> WordIdentifier:
     """A convenience function to load word vocabularies learned for SMILES strings in the study.
     The possible vocabularies to load are for DeepDTA and BPE-DTA. 
 
@@ -154,7 +154,7 @@ def load_chemical_word_identifier(vocab_size: int) -> type[WordIdentifier]:
     return WordIdentifier.from_file(vocab_path)
 
 
-def load_protein_word_identifier(vocab_size: int)-> type[WordIdentifier]:
+def load_protein_word_identifier(vocab_size: int)-> WordIdentifier:
     """A convenience function to load word vocabularies learned for amino-acid sequences in the study.
     The possible vocabularies to load are for DeepDTA and BPE-DTA. 
 

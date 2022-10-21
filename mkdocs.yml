@@ -1,12 +1,23 @@
 site_name: pydebiaseddta
 
 theme:
-  name: "material"
+  name: material
+  logo: assets/boun_logo.png
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
 
 repo_url: https://github.com/rizaozcelik/pydebiaseddta/
 
 plugins:
   - mkdocstrings
+  - search
 
 markdown_extensions:
   - pymdownx.arithmatex:

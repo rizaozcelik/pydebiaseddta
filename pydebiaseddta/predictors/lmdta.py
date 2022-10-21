@@ -9,7 +9,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from transformers import AutoTokenizer, AutoModel
 
-from .base_predictors import TFPredictor
+from .abstract_predictors import TFPredictor
 
 
 class LMDTA(TFPredictor):
@@ -50,7 +50,7 @@ class LMDTA(TFPredictor):
         output = self.chemberta(**tokens)
         return output.last_hidden_state.detach().numpy().mean(axis=1)
 
-    def vectorize_chemicals(self, chemicals: List[str]):
+    def vectorize_ligands(self, chemicals: List[str]):
         return np.vstack([self.get_chemberta_embedding(chemical) for chemical in chemicals])
 
     @lru_cache(maxsize=1024)

@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Input, Embedding
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 
-from .base_predictors import TFPredictor
+from .abstract_predictors import TFPredictor
 from ..sequence.word_identification import (
     load_chemical_word_identifier,
     load_protein_word_identifier,
@@ -127,7 +127,7 @@ class DeepDTA(TFPredictor):
         )
         return deepdta
 
-    def vectorize_chemicals(self, chemicals: List[str]):
+    def vectorize_ligands(self, chemicals: List[str]):
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(chemicals, smi_to_unichar_encoding)
         word_identifier = load_chemical_word_identifier(vocab_size=94)
