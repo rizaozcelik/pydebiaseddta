@@ -3,6 +3,7 @@ site_name: pydebiaseddta
 theme:
   name: material
   logo: assets/boun_logo.png
+  favicon: assets/boun_logo.png
   palette:
     - scheme: default
       toggle:
