@@ -162,9 +162,9 @@ class DeepDTA(TFPredictor):
         )
         return deepdta
 
-    def vectorize_ligands(self, chemicals: List[str]) -> np.array:
+    def vectorize_ligands(self, ligands: List[str]) -> np.array:
         """Segments SMILES strings of ligands into characters and applies label encoding.
-        Truncation and padding is also applied to prepare ligands for training and/or prediction.
+        Truncation and padding are also applied to prepare ligands for training and/or prediction.
 
         Parameters
         ----------
@@ -174,10 +174,10 @@ class DeepDTA(TFPredictor):
         Returns
         -------
         np.array
-            An $N \times max\_smi\_len$ ($N$ iz the number of the input ligands) matrix that contains label encoded sequences of SMILES tokens.
+            An $N \\times max\\_smi\\_len$ ($N$ is the number of the input ligands) matrix that contains label encoded sequences of SMILES tokens.
         """     
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
-        unichars = smiles_to_unichar_batch(chemicals, smi_to_unichar_encoding)
+        unichars = smiles_to_unichar_batch(ligands, smi_to_unichar_encoding)
         word_identifier = load_chemical_word_identifier(vocab_size=94)
 
         return np.array(
@@ -186,17 +186,17 @@ class DeepDTA(TFPredictor):
 
     def vectorize_proteins(self, aa_sequences: List[str]) -> np.array:
         """Segments amino-acid sequences of proteins into characters and applies label encoding.
-        Truncation and padding is also applied to prepare proteins for training and/or prediction.
+        Truncation and padding are also applied to prepare proteins for training and/or prediction.
 
         Parameters
         ----------
-        proteins : List[str]
+        aa_sequences : List[str]
             The amino-acid sequences of proteins.
 
         Returns
         -------
         np.array
-            An $N \times max\_prot\_len$ ($N$ is the number of the input proteins) matrix that contains label encoded sequences of amino-acids.
+            An $N \\times max\\_prot\\_len$ ($N$ is the number of the input proteins) matrix that contains label encoded sequences of amino-acids.
         """
         word_identifier = load_protein_word_identifier(vocab_size=26)
         return np.array(
