@@ -8,7 +8,7 @@
       
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/boun_logo.png">
       <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
@@ -800,10 +800,10 @@ Defaults to <code>True</code>.</p></td>
 <span class="sd">        Input SMILES string.</span>
 <span class="sd">    segment_sq_brackets : bool, optional</span>
 <span class="sd">        Whether to segment expressions within square brackets (*e.g.* [C@@H], [Rb]), too. </span>
-<span class="sd">        Set to ``True`` to have square brackets and the tokens inside as standalone tokens,</span>
+<span class="sd">        Set to `True` to have square brackets and the tokens inside as standalone tokens,</span>
 <span class="sd">        *e.g.* [&quot;[&quot;, &quot;C&quot;, &quot;@&quot;, &quot;@&quot;, &quot;H&quot;, &quot;]&quot;]. </span>
-<span class="sd">        When set to ``False``, whole expression is returned as a single token, *e.g.* &quot;[C@@H]&quot; .</span>
-<span class="sd">        Defaults to ``True``.</span>
+<span class="sd">        When set to `False`, whole expression is returned as a single token, *e.g.* &quot;[C@@H]&quot; .</span>
+<span class="sd">        Defaults to `True`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -832,7 +832,7 @@ Defaults to <code>True</code>.</p></td>
 
   <div class="doc doc-contents ">
   
-      <p>Segments multiple SMILES strings with a single call by wrapping <code>sequence.smiles_processsing.segment_smiles</code>.</p>
+      <p>Segments multiple SMILES strings with a single call by wrapping <code>sequence.smiles_processing.segment_smiles</code>.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -861,7 +861,7 @@ Defaults to <code>True</code>.</p></td>
                 <code>bool, optional</code>
           </td>
           <td><p>Whether to segment expressions within square brackets. 
-See <code>sequence.smiles_processsing.segment_smiles</code> for a more detailed explanation.
+See <code>sequence.smiles_processing.segment_smiles</code> for a more detailed explanation.
 Defaults to <code>True</code>.</p></td>
           <td>
                 <code>True</code>
@@ -883,7 +883,7 @@ Defaults to <code>True</code>.</p></td>
           <td>
                 <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A 2D list of strings where element <code>[i][j]</code> corresponds to the <code>j</code>th token of the <code>i</code>th input.</p></td>
+          <td><p>A 2D list of strings where element <span class="arithmatex">\([i][j]\)</span> corresponds to the <span class="arithmatex">\(j^{th}\)</span> token of the <span class="arithmatex">\(i^{th}\)</span> input.</p></td>
         </tr>
     </tbody>
   </table>
@@ -912,7 +912,7 @@ Defaults to <code>True</code>.</p></td>
 <span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">segment_smiles_batch</span><span class="p">(</span>
     <span class="n">smiles_batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">segment_sq_brackets</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Segments multiple SMILES strings with a single call by wrapping ``sequence.smiles_processsing.segment_smiles``.</span>
+    <span class="sd">&quot;&quot;&quot;Segments multiple SMILES strings with a single call by wrapping `sequence.smiles_processing.segment_smiles`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -920,13 +920,13 @@ Defaults to <code>True</code>.</p></td>
 <span class="sd">        List of input SMILES strings.</span>
 <span class="sd">    segment_sq_brackets : bool, optional</span>
 <span class="sd">        Whether to segment expressions within square brackets. </span>
-<span class="sd">        See ``sequence.smiles_processsing.segment_smiles`` for a more detailed explanation.</span>
-<span class="sd">        Defaults to ``True``.</span>
+<span class="sd">        See `sequence.smiles_processing.segment_smiles` for a more detailed explanation.</span>
+<span class="sd">        Defaults to `True`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    List[List[str]]</span>
-<span class="sd">        A 2D list of strings where element `[i][j]` corresponds to the `j`th token of the `i`th input.</span>
+<span class="sd">        A 2D list of strings where element $[i][j]$ corresponds to the $j^{th}$ token of the $i^{th}$ input.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">segment_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">segment_sq_brackets</span><span class="p">)</span> <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_batch</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
