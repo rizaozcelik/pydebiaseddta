@@ -26,10 +26,10 @@ def segment_smiles(smiles: str, segment_sq_brackets: bool = True) -> List[str]:
         Input SMILES string.
     segment_sq_brackets : bool, optional
         Whether to segment expressions within square brackets (*e.g.* [C@@H], [Rb]), too. 
-        Set to ``True`` to have square brackets and the tokens inside as standalone tokens,
+        Set to `True` to have square brackets and the tokens inside as standalone tokens,
         *e.g.* ["[", "C", "@", "@", "H", "]"]. 
-        When set to ``False``, whole expression is returned as a single token, *e.g.* "[C@@H]" .
-        Defaults to ``True``.
+        When set to `False`, whole expression is returned as a single token, *e.g.* "[C@@H]" .
+        Defaults to `True`.
 
     Returns
     -------
@@ -45,7 +45,7 @@ def segment_smiles(smiles: str, segment_sq_brackets: bool = True) -> List[str]:
 def segment_smiles_batch(
     smiles_batch: List[str], segment_sq_brackets=True
 ) -> List[List[str]]:
-    """Segments multiple SMILES strings with a single call by wrapping ``sequence.smiles_processsing.segment_smiles``.
+    """Segments multiple SMILES strings with a single call by wrapping `sequence.smiles_processing.segment_smiles`.
 
     Parameters
     ----------
@@ -53,13 +53,13 @@ def segment_smiles_batch(
         List of input SMILES strings.
     segment_sq_brackets : bool, optional
         Whether to segment expressions within square brackets. 
-        See ``sequence.smiles_processsing.segment_smiles`` for a more detailed explanation.
-        Defaults to ``True``.
+        See `sequence.smiles_processing.segment_smiles` for a more detailed explanation.
+        Defaults to `True`.
 
     Returns
     -------
     List[List[str]]
-        A 2D list of strings where element `[i][j]` corresponds to the `j`th token of the `i`th input.
+        A 2D list of strings where element $[i][j]$ corresponds to the $j^{th}$ token of the $i^{th}$ input.
     """
     return [segment_smiles(smiles, segment_sq_brackets) for smiles in smiles_batch]
 

@@ -137,7 +137,7 @@ class TFPredictor(Predictor):
 
     @classmethod
     def from_file(cls, path: str):
-        """A utility function to load a DTA prediction model from disk.
+        """A utility function to load a `TFPredictor` instance from disk.
         All attributes, including the model weights, are loaded.
 
         Parameters
@@ -259,12 +259,35 @@ class TFPredictor(Predictor):
 
         return self.history
 
-    def predict(self, ligands, proteins):
+    def predict(self, ligands: List[str], proteins: List[str]) -> List[float]:
+        """Predicts the affinities of a `List` of protein-ligand pairs via the trained DTA prediction model,
+        *i.e.*, BPE-DTA, LM-DTA, and BPE-DTA. 
+
+        Parameters
+        ----------
+        ligands : List[str]
+            SMILES strings of the ligands.
+        proteins : List[str]
+            Amino-acid sequences of the proteins.
+
+        Returns
+        -------
+        List[float]
+            Predicted affinity scores by DTA prediction model.
+        """        
         ligand_vectors = self.vectorize_ligands(ligands)
         protein_vectors = self.vectorize_proteins(proteins)
         return self.model.predict([ligand_vectors, protein_vectors]).tolist()
 
-    def save(self, path):
+    def save(self, path: str) -> None:
+        """A utility function to save a `TFPredictor` instance to the disk.
+        All attributes, including the model weights, are saved.
+
+        Parameters
+        ----------
+        path : str
+            Path to save the predictor.
+        """        
         self.model.save(f"{path}/model")
 
         with open(f"{path}/history.json", "w") as f:
