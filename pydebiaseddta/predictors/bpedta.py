@@ -46,7 +46,7 @@ class BPEDTA(TFPredictor):
         embedding_dim : int, optional
             The dimension of the biomolecule words, by default 128.
         learning_rate : float, optional
-            Leaning rate during optimization, by default 0.001.
+            Learning rate during optimization, by default 0.001.
         batch_size : int, optional
             Batch size during training, by default 256.
         n_epochs : int, optional
