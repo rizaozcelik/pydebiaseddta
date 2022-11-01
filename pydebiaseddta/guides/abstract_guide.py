@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Any
 
 
-class BaseGuide(ABC):
+class AbstractGuide(ABC):
     @abstractmethod
     def train(
         train_chemicals: List[Any],

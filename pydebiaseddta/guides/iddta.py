@@ -2,14 +2,14 @@ import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.tree import DecisionTreeRegressor
 
-from .base_guide import BaseGuide
+from .base_guide import AbstractGuide
 
 
 def _list_to_numpy(lst):
     return np.array(lst).reshape(-1, 1)
 
 
-class IDDTA(BaseGuide):
+class IDDTA(AbstractGuide):
     def __init__(self):
         self.prediction_model = DecisionTreeRegressor()
         self.chemical_encoder = OneHotEncoder(handle_unknown="ignore")

@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.tree import DecisionTreeRegressor
 from tensorflow.keras.preprocessing.text import Tokenizer
 
-from .base_guide import BaseGuide
+from .base_guide import AbstractGuide
 from ..sequence.word_identification import (
     load_chemical_word_identifier,
     load_protein_word_identifier,
@@ -14,7 +14,7 @@ from ..sequence.smiles_processing import (
 )
 
 
-class BoWDTA(BaseGuide):
+class BoWDTA(AbstractGuide):
     def __init__(self):
         self.chemical_bow_vectorizer = Tokenizer(
             filters=None, lower=False, oov_token="C"
