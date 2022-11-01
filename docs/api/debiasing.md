@@ -1,6 +1,7 @@
 # debiasing
 
-::: pydebiaseddta.debiasing.debiaseddta
+::: pydebiaseddta.debiasing
     options:
         docstring_style: numpy
+::: pydebiaseddta.debiasing.debiaseddta
     
