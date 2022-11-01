@@ -543,6 +543,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA" class="md-nav__link">
+    LMDTA
+  </a>
+  
+    <nav class="md-nav" aria-label="LMDTA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.build" class="md-nav__link">
+    build()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.get_chemberta_embedding" class="md-nav__link">
+    get_chemberta_embedding()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.get_protbert_embedding" class="md-nav__link">
+    get_protbert_embedding()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.vectorize_ligands" class="md-nav__link">
+    vectorize_ligands()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.vectorize_proteins" class="md-nav__link">
+    vectorize_proteins()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -860,6 +915,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA" class="md-nav__link">
+    LMDTA
+  </a>
+  
+    <nav class="md-nav" aria-label="LMDTA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.build" class="md-nav__link">
+    build()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.get_chemberta_embedding" class="md-nav__link">
+    get_chemberta_embedding()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.get_protbert_embedding" class="md-nav__link">
+    get_protbert_embedding()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.vectorize_ligands" class="md-nav__link">
+    vectorize_ligands()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pydebiaseddta.predictors.lmdta.LMDTA.vectorize_proteins" class="md-nav__link">
+    vectorize_proteins()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -934,7 +1044,7 @@ Abstract classes are also available to quickly train a custom DTA prediction mod
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.Predictor" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor">
         <code>Predictor</code>
 
 
@@ -954,7 +1064,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1083,7 +1193,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.Predictor.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1122,7 +1232,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
@@ -1152,7 +1262,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.Predictor.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">val_ligands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_proteins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weights_by_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1261,7 +1371,7 @@ However, the training procedure must support sample weighting in every epoch.</p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -1351,7 +1461,7 @@ However, the training procedure must support sample weighting in every epoch.</p
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor">
         <code>TFPredictor</code>
 
 
@@ -1370,7 +1480,7 @@ Model training, prediction, and save/load functions are inherited from this clas
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
 <span class="normal"> 91</span>
 <span class="normal"> 92</span>
@@ -1809,7 +1919,7 @@ Model training, prediction, and save/load functions are inherited from this clas
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1869,7 +1979,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
@@ -1917,7 +2027,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
@@ -1933,7 +2043,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
@@ -1955,7 +2065,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.from_file" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.from_file">
 <code class="highlight language-python"><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2013,7 +2123,7 @@ All attributes, including the model weights, are loaded.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
@@ -2073,7 +2183,7 @@ All attributes, including the model weights, are loaded.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.predict" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.predict">
 <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">ligands</span><span class="p">,</span> <span class="n">proteins</span><span class="p">)</span></code>
 
 </h3>
@@ -2137,7 +2247,7 @@ All attributes, including the model weights, are loaded.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">262</span>
 <span class="normal">263</span>
 <span class="normal">264</span>
@@ -2185,7 +2295,7 @@ All attributes, including the model weights, are loaded.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.save" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.save">
 <code class="highlight language-python"><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 </h3>
@@ -2221,7 +2331,7 @@ All attributes, including the model weights, are saved.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
@@ -2267,7 +2377,7 @@ All attributes, including the model weights, are saved.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">val_ligands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_proteins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weights_by_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
@@ -2387,7 +2497,7 @@ By default <code>None</code> and no weighting is used.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">164</span>
 <span class="normal">165</span>
 <span class="normal">166</span>
@@ -2591,7 +2701,7 @@ By default <code>None</code> and no weighting is used.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2607,7 +2717,7 @@ By default <code>None</code> and no weighting is used.</p></td>
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
@@ -2629,7 +2739,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">proteins</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2645,7 +2755,7 @@ Every child has to implement this function.</p>
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
@@ -2676,7 +2786,7 @@ Every child has to implement this function.</p>
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.create_uniform_weights" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.create_uniform_weights">
 <code class="highlight language-python"><span class="n">create_uniform_weights</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">)</span></code>
 
 </h2>
@@ -2740,7 +2850,7 @@ Every child has to implement this function.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -2809,7 +2919,7 @@ Every child has to implement this function.</p>
 
 
 
-<h2 id="pydebiaseddta.predictors.deepdta.DeepDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA">
         <code>DeepDTA</code>
 
 
@@ -2823,7 +2933,7 @@ Every child has to implement this function.</p>
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -3037,7 +3147,7 @@ Every child has to implement this function.</p>
 <span class="sd">        embedding_dim : int, optional</span>
 <span class="sd">            The dimension of the biomolecule characters, by default 128.</span>
 <span class="sd">        learning_rate : float, optional</span>
-<span class="sd">            Leaning rate during optimization, by default 0.001.</span>
+<span class="sd">            Learning rate during optimization, by default 0.001.</span>
 <span class="sd">        batch_size : int, optional</span>
 <span class="sd">            Batch size during training, by default 256.</span>
 <span class="sd">        n_epochs : int, optional</span>
@@ -3212,7 +3322,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">max_smi_len</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_prot_len</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">smi_filter_len</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prot_filter_len</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
 
 </h3>
@@ -3273,7 +3383,7 @@ Longer sequences are truncated.</p></td>
           <td>
                 <code>float, optional</code>
           </td>
-          <td><p>Leaning rate during optimization, by default 0.001.</p></td>
+          <td><p>Learning rate during optimization, by default 0.001.</p></td>
           <td>
                 <code>0.001</code>
           </td>
@@ -3332,7 +3442,7 @@ Longer sequences are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -3410,7 +3520,7 @@ Longer sequences are truncated.</p></td>
 <span class="sd">    embedding_dim : int, optional</span>
 <span class="sd">        The dimension of the biomolecule characters, by default 128.</span>
 <span class="sd">    learning_rate : float, optional</span>
-<span class="sd">        Leaning rate during optimization, by default 0.001.</span>
+<span class="sd">        Learning rate during optimization, by default 0.001.</span>
 <span class="sd">    batch_size : int, optional</span>
 <span class="sd">        Batch size during training, by default 256.</span>
 <span class="sd">    n_epochs : int, optional</span>
@@ -3442,7 +3552,7 @@ Longer sequences are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
 
 </h3>
@@ -3471,7 +3581,7 @@ Longer sequences are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
 <span class="normal"> 73</span>
 <span class="normal"> 74</span>
@@ -3665,7 +3775,7 @@ Longer sequences are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -3719,7 +3829,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
@@ -3771,7 +3881,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -3825,7 +3935,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
@@ -3905,7 +4015,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h2 id="pydebiaseddta.predictors.bpedta.BPEDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA">
         <code>BPEDTA</code>
 
 
@@ -3919,7 +4029,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -4128,7 +4238,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 <span class="sd">        embedding_dim : int, optional</span>
 <span class="sd">            The dimension of the biomolecule words, by default 128.</span>
 <span class="sd">        learning_rate : float, optional</span>
-<span class="sd">            Leaning rate during optimization, by default 0.001.</span>
+<span class="sd">            Learning rate during optimization, by default 0.001.</span>
 <span class="sd">        batch_size : int, optional</span>
 <span class="sd">            Batch size during training, by default 256.</span>
 <span class="sd">        n_epochs : int, optional</span>
@@ -4298,7 +4408,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">max_smi_len</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_prot_len</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">smi_filter_len</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prot_filter_len</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
 
 </h3>
@@ -4359,7 +4469,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
           <td>
                 <code>float, optional</code>
           </td>
-          <td><p>Leaning rate during optimization, by default 0.001.</p></td>
+          <td><p>Learning rate during optimization, by default 0.001.</p></td>
           <td>
                 <code>0.001</code>
           </td>
@@ -4418,7 +4528,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -4496,7 +4606,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
 <span class="sd">    embedding_dim : int, optional</span>
 <span class="sd">        The dimension of the biomolecule words, by default 128.</span>
 <span class="sd">    learning_rate : float, optional</span>
-<span class="sd">        Leaning rate during optimization, by default 0.001.</span>
+<span class="sd">        Learning rate during optimization, by default 0.001.</span>
 <span class="sd">    batch_size : int, optional</span>
 <span class="sd">        Batch size during training, by default 256.</span>
 <span class="sd">    n_epochs : int, optional</span>
@@ -4528,7 +4638,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
 
 </h3>
@@ -4557,7 +4667,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
 <span class="normal"> 73</span>
 <span class="normal"> 74</span>
@@ -4745,7 +4855,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -4799,7 +4909,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
@@ -4847,7 +4957,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -4901,7 +5011,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
 <span class="normal">183</span>
 <span class="normal">184</span>
@@ -4976,6 +5086,916 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA">
+        <code>LMDTA</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="pydebiaseddta.predictors.abstract_predictors.TFPredictor" href="#pydebiaseddta.predictors.abstract_predictors.TFPredictor">TFPredictor</a></code></p>
+
+
+
+        <details class="quote">
+          <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LMDTA</span><span class="p">(</span><span class="n">TFPredictor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor to create a LMDTA instance.</span>
+<span class="sd">        LMDTA represents ligands and proteins with pre-trained language model embeddings</span>
+<span class="sd">        obtained via [`ChemBERTa`](https://arxiv.org/abs/2010.09885) and  [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) models, respectively. </span>
+<span class="sd">        A fully-connected neural network with two layers is used afterwards to predict affinities.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_epochs : int, optional</span>
+<span class="sd">            Number of epochs to train the model, by default 200.</span>
+<span class="sd">        learning_rate : float, optional</span>
+<span class="sd">            Learning rate during optimization, by default 0.001.</span>
+<span class="sd">        batch_size : int, optional</span>
+<span class="sd">             Batch size during training, by default 256.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transformers</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">transformers</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chemical_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+            <span class="s2">&quot;seyonec/PubChem10M_SMILES_BPE_450k&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chemberta</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;seyonec/PubChem10M_SMILES_BPE_450k&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">protein_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+            <span class="s2">&quot;Rostlab/prot_bert&quot;</span><span class="p">,</span> <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protbert</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Rostlab/prot_bert&quot;</span><span class="p">)</span>
+        <span class="n">TFPredictor</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Builds a `LMDTA` predictor in `keras` with the parameters specified during construction.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tensorflow.keras.models.Model</span>
+<span class="sd">            The built model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">chemicals</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">768</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="n">proteins</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1024</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+
+        <span class="n">interaction_representation</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)([</span><span class="n">chemicals</span><span class="p">,</span> <span class="n">proteins</span><span class="p">])</span>
+
+        <span class="n">FC1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">interaction_representation</span><span class="p">)</span>
+        <span class="n">FC1</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">FC1</span><span class="p">)</span>
+        <span class="n">FC2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">FC1</span><span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)(</span><span class="n">FC2</span><span class="p">)</span>
+
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">)</span>
+        <span class="n">lmdta</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">chemicals</span><span class="p">,</span> <span class="n">proteins</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">predictions</span><span class="p">])</span>
+        <span class="n">lmdta</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">lmdta</span>
+
+    <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_chemberta_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Computes the [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vector for a ligand. </span>
+<span class="sd">        Since the creating the vector is computation-heavy, an `lru_cache` of size 2048 is used to store produced vectors.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        smiles : str</span>
+<span class="sd">            SMILES string of the ligand.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.array</span>
+<span class="sd">            [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vector (768-dimensional) of the ligand.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_tokenizer</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemberta</span><span class="p">(</span><span class="o">**</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">vectorize_ligands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ligands</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Vectorizes the ligands with [`ChemBERTa`](https://arxiv.org/abs/2010.09885) embeddings.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ligands : List[str]</span>
+<span class="sd">            The SMILES strings of ligands.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.array</span>
+<span class="sd">            An $N \\times 768$ ($N$ is the number of the input ligands) matrix that contains [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vectors of the ligands.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_chemberta_embedding</span><span class="p">(</span><span class="n">chemical</span><span class="p">)</span> <span class="k">for</span> <span class="n">chemical</span> <span class="ow">in</span> <span class="n">ligands</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_protbert_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aa_sequence</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Computes the [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vector for a protein. </span>
+<span class="sd">        Since the creating the vector is computation-heavy, an `lru_cache` of size 2048 is used to store produced vectors.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        aa_sequence : str</span>
+<span class="sd">            Amino-acid sequence of the protein.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.array</span>
+<span class="sd">            [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vector (1024-dimensional) of the protein.</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="n">pp_sequence</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span>
+        <span class="n">cleaned_sequence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[UZOB]&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">pp_sequence</span><span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">protein_tokenizer</span><span class="p">(</span><span class="n">cleaned_sequence</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">protbert</span><span class="p">(</span><span class="o">**</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">vectorize_proteins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aa_sequences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Vectorizes the proteins with [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) embeddings.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        aa_sequences : List[str]</span>
+<span class="sd">            The amino-acid sequences of the proteins.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.array</span>
+<span class="sd">            An $N \\times 1024$ ($N$ is the number of the input proteins) matrix that contains [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vectors of the ligands.</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_protbert_embedding</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span> <span class="k">for</span> <span class="n">aa_sequence</span> <span class="ow">in</span> <span class="n">aa_sequences</span><span class="p">]</span>
+        <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.__init__">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Constructor to create a LMDTA instance.
+LMDTA represents ligands and proteins with pre-trained language model embeddings
+obtained via <a href="https://arxiv.org/abs/2010.09885"><code>ChemBERTa</code></a> and  <a href="https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf"><code>ProtBert</code></a> models, respectively. 
+A fully-connected neural network with two layers is used afterwards to predict affinities.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>n_epochs</code></td>
+          <td>
+                <code>int, optional</code>
+          </td>
+          <td><p>Number of epochs to train the model, by default 200.</p></td>
+          <td>
+                <code>200</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>learning_rate</code></td>
+          <td>
+                <code>float, optional</code>
+          </td>
+          <td><p>Learning rate during optimization, by default 0.001.</p></td>
+          <td>
+                <code>0.001</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>batch_size</code></td>
+          <td>
+                <code>int, optional</code>
+          </td>
+          <td><p>Batch size during training, by default 256.</p></td>
+          <td>
+                <code>256</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Constructor to create a LMDTA instance.</span>
+<span class="sd">    LMDTA represents ligands and proteins with pre-trained language model embeddings</span>
+<span class="sd">    obtained via [`ChemBERTa`](https://arxiv.org/abs/2010.09885) and  [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) models, respectively. </span>
+<span class="sd">    A fully-connected neural network with two layers is used afterwards to predict affinities.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_epochs : int, optional</span>
+<span class="sd">        Number of epochs to train the model, by default 200.</span>
+<span class="sd">    learning_rate : float, optional</span>
+<span class="sd">        Learning rate during optimization, by default 0.001.</span>
+<span class="sd">    batch_size : int, optional</span>
+<span class="sd">         Batch size during training, by default 256.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transformers</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">set_verbosity</span><span class="p">(</span><span class="n">transformers</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">chemical_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="s2">&quot;seyonec/PubChem10M_SMILES_BPE_450k&quot;</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">chemberta</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;seyonec/PubChem10M_SMILES_BPE_450k&quot;</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">protein_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="s2">&quot;Rostlab/prot_bert&quot;</span><span class="p">,</span> <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">protbert</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Rostlab/prot_bert&quot;</span><span class="p">)</span>
+    <span class="n">TFPredictor</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.build">
+<code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Builds a <code>LMDTA</code> predictor in <code>keras</code> with the parameters specified during construction.</p>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>tensorflow.<span title="tensorflow.keras">keras</span>.<span title="tensorflow.keras.models">models</span>.<span title="tensorflow.keras.models.Model">Model</span></code>
+          </td>
+          <td><p>The built model.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a `LMDTA` predictor in `keras` with the parameters specified during construction.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tensorflow.keras.models.Model</span>
+<span class="sd">        The built model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chemicals</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">768</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+    <span class="n">proteins</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1024</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+
+    <span class="n">interaction_representation</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)([</span><span class="n">chemicals</span><span class="p">,</span> <span class="n">proteins</span><span class="p">])</span>
+
+    <span class="n">FC1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">interaction_representation</span><span class="p">)</span>
+    <span class="n">FC1</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">FC1</span><span class="p">)</span>
+    <span class="n">FC2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">FC1</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)(</span><span class="n">FC2</span><span class="p">)</span>
+
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="n">lmdta</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">chemicals</span><span class="p">,</span> <span class="n">proteins</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">predictions</span><span class="p">])</span>
+    <span class="n">lmdta</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">lmdta</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.get_chemberta_embedding">
+<code class="highlight language-python"><span class="n">get_chemberta_embedding</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Computes the <a href="https://arxiv.org/abs/2010.09885"><code>ChemBERTa</code></a> vector for a ligand. 
+Since the creating the vector is computation-heavy, an <code>lru_cache</code> of size 2048 is used to store produced vectors.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>smiles</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>SMILES string of the ligand.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
+          </td>
+          <td><p><a href="https://arxiv.org/abs/2010.09885"><code>ChemBERTa</code></a> vector (768-dimensional) of the ligand.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">2048</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_chemberta_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vector for a ligand. </span>
+<span class="sd">    Since the creating the vector is computation-heavy, an `lru_cache` of size 2048 is used to store produced vectors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    smiles : str</span>
+<span class="sd">        SMILES string of the ligand.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vector (768-dimensional) of the ligand.</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemical_tokenizer</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chemberta</span><span class="p">(</span><span class="o">**</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.get_protbert_embedding">
+<code class="highlight language-python"><span class="n">get_protbert_embedding</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-cached"><code>cached</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Computes the <a href="https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf"><code>ProtBert</code></a> vector for a protein. 
+Since the creating the vector is computation-heavy, an <code>lru_cache</code> of size 2048 is used to store produced vectors.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>aa_sequence</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Amino-acid sequence of the protein.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
+          </td>
+          <td><p><a href="https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf"><code>ProtBert</code></a> vector (1024-dimensional) of the protein.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_protbert_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aa_sequence</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vector for a protein. </span>
+<span class="sd">    Since the creating the vector is computation-heavy, an `lru_cache` of size 2048 is used to store produced vectors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    aa_sequence : str</span>
+<span class="sd">        Amino-acid sequence of the protein.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vector (1024-dimensional) of the protein.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">pp_sequence</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span>
+    <span class="n">cleaned_sequence</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[UZOB]&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">pp_sequence</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">protein_tokenizer</span><span class="p">(</span><span class="n">cleaned_sequence</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">protbert</span><span class="p">(</span><span class="o">**</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_ligands">
+<code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Vectorizes the ligands with <a href="https://arxiv.org/abs/2010.09885"><code>ChemBERTa</code></a> embeddings.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>ligands</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>The SMILES strings of ligands.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
+          </td>
+          <td><p>An <span class="arithmatex">\(N \times 768\)</span> (<span class="arithmatex">\(N\)</span> is the number of the input ligands) matrix that contains <a href="https://arxiv.org/abs/2010.09885"><code>ChemBERTa</code></a> vectors of the ligands.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vectorize_ligands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ligands</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Vectorizes the ligands with [`ChemBERTa`](https://arxiv.org/abs/2010.09885) embeddings.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ligands : List[str]</span>
+<span class="sd">        The SMILES strings of ligands.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        An $N \\times 768$ ($N$ is the number of the input ligands) matrix that contains [`ChemBERTa`](https://arxiv.org/abs/2010.09885) vectors of the ligands.</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_chemberta_embedding</span><span class="p">(</span><span class="n">chemical</span><span class="p">)</span> <span class="k">for</span> <span class="n">chemical</span> <span class="ow">in</span> <span class="n">ligands</span><span class="p">]</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_proteins">
+<code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Vectorizes the proteins with <a href="https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf"><code>ProtBert</code></a> embeddings.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>aa_sequences</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>The amino-acid sequences of the proteins.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
+          </td>
+          <td><p>An <span class="arithmatex">\(N \times 1024\)</span> (<span class="arithmatex">\(N\)</span> is the number of the input proteins) matrix that contains <a href="https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf"><code>ProtBert</code></a> vectors of the ligands.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">vectorize_proteins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aa_sequences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Vectorizes the proteins with [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) embeddings.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    aa_sequences : List[str]</span>
+<span class="sd">        The amino-acid sequences of the proteins.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.array</span>
+<span class="sd">        An $N \\times 1024$ ($N$ is the number of the input proteins) matrix that contains [`ProtBert`](https://www.biorxiv.org/content/biorxiv/early/2020/07/21/2020.07.12.199554.full.pdf) vectors of the ligands.</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_protbert_embedding</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span> <span class="k">for</span> <span class="n">aa_sequence</span> <span class="ow">in</span> <span class="n">aa_sequences</span><span class="p">]</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
