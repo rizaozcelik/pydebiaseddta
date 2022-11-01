@@ -3,3 +3,4 @@ docs/_build/*
 docs/source/_autosummary/*
 dist/*
 **.egg-info/
+.vscode/*

@@ -4,19 +4,19 @@ from . import package_path
 
 
 def load_sample_dta_data(mini: bool = False) -> Dict[str, List]:
-    """Loads a portion of the `BDB dataset <https://arxiv.org/pdf/2107.05556.pdf>`_ for fast experimenting.
+    """Loads a portion of [the BDB dataset](https://arxiv.org/pdf/2107.05556.pdf) for fast experimenting.
 
     Parameters
     ----------
     mini : bool, optional
         Whether to load all drug-target pairs embedded in the library, or a mini version.
-        Set to ``True`` for fast prototyping and ``False`` to quickly train a model.
-        Defaults to ``False``.
+        Set to `True` for fast prototyping and `False` to quickly train a model.
+        Defaults to `False`.
 
     Returns
     -------
     Dict[str, List]
-        The dictionary has three keys: "train", "val", and "test", each corresponding to different folds of the dataset.
+        The dictionary has three keys: `"train"`, `"val"`, and `"test"`, each corresponding to different folds of the dataset.
         Each key maps to a list with three elements: *list of chemicals*, *list of proteins*, and *list of affinity scores*. 
         The elements in the same index of the lists correspond to a drug-target affinity measurement.
     """

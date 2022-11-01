@@ -6,14 +6,14 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 def ci(gold_truths: List[float], predictions: List[float]) -> float:
     """Computes concordance index (CI) between the expected values and predictions. 
-    See `Gönen and Heller (2005) <https://www.jstor.org/stable/20441249>`_ for the details of the metric.
+    See [Gönen and Heller (2005)](https://www.jstor.org/stable/20441249) for the details of the metric.
 
     Parameters
     ----------
-        gold_truths : List[float]
-            The gold labels in the dataset.  
-        predictions : List[float]
-             Predictions of a model.
+    gold_truths : List[float]
+        The gold labels in the dataset.  
+    predictions : List[float]
+        Predictions of a model.
     
     Returns
     -------
@@ -67,7 +67,7 @@ def rmse(gold_truths: List[float], predictions: List[float]) -> float:
 
 
 def r2(gold_truths: List[float], predictions: List[float]) -> float:
-    """Compute :math:`R^2` (coefficient of determinant) between expected and predicted values.
+    """Compute $R^2$ (coefficient of determinant) between expected and predicted values.
 
     Parameters
     ----------
@@ -79,7 +79,7 @@ def r2(gold_truths: List[float], predictions: List[float]) -> float:
     Returns
     -------
     float
-        :math:`R^2` (coefficient of determinant) score.
+        $R^2$ (coefficient of determinant) score.
     """
     return float(r2_score(gold_truths, predictions))
 
@@ -91,18 +91,17 @@ def evaluate_predictions(
 
     Parameters
     ----------
-        gold_truths : List[float]
-            The gold labels in the dataset.
-        predictions : List[float]
-            Predictions of a model.
-        metrics  : List[str]
-            Name of the evaluation metrics to compute. 
-            Possible values are: {"ci", "r2", "rmse", "mse"}. 
-            All metrics are computed if no value is provided.
-            
+    gold_truths : List[float]
+        The gold labels in the dataset.
+    predictions : List[float]
+        Predictions of a model.
+    metrics : List[str]
+        Name of the evaluation metrics to compute. Possible values are: `{"ci", "r2", "rmse", "mse"}`.
+        All metrics are computed if no value is provided.
+
     Returns
     -------
-    Dict[str, float]
+    Dict[str,float]
         A dictionary that maps each metric name to the computed value.
     """
     if metrics is None:
