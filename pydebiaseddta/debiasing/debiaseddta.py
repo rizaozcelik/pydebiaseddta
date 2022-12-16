@@ -9,7 +9,7 @@ from pydebiaseddta import guides, predictors
 class DebiasedDTA:
     def __init__(
         self,
-        guide_cls: Type[guides.AbstractGuide],
+        guide_cls: Type[guides.Guide],
         predictor_cls: Type[predictors.BasePredictor],
         mini_val_frac: float = 0.2,
         n_bootstrapping: int = 10,
