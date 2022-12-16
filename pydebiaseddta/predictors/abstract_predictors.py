@@ -247,7 +247,7 @@ class TFPredictor(Predictor):
             if val_tuple is not None:
                 val_stats = evaluate_predictions(
                     y_true=val_labels,
-                    y_preds=self.predict(val_tuple[0], val_tuple[1]),
+                    y_preds=self.predict(val_ligands, val_proteins),
                     metrics=list(val_stats_over_epochs.keys()),
                 )
                 for metric, stat in val_stats.items():

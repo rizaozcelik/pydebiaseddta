@@ -1,6 +1,6 @@
 [project]
 name = "pydebiaseddta"
-version="0.0.4"
+version="0.0.5"
 authors = [
     {name = "Rıza Özçelik", email = "riza.ozcelik@boun.edu.tr"}
 ]
