@@ -630,7 +630,7 @@ and so does the impact of <span class="arithmatex">\(\vec{i}\)</span>, importanc
 
 
 
-<h2 id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA">
         <code>DebiasedDTA</code>
 
 
@@ -642,7 +642,7 @@ and so does the impact of <span class="arithmatex">\(\vec{i}\)</span>, importanc
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\debiasing\debiaseddta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/debiasing/debiaseddta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  9</span>
 <span class="normal"> 10</span>
 <span class="normal"> 11</span>
@@ -1141,7 +1141,7 @@ and so does the impact of <span class="arithmatex">\(\vec{i}\)</span>, importanc
 
 
 
-<h3 id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">guide_cls</span><span class="p">,</span> <span class="n">predictor_cls</span><span class="p">,</span> <span class="n">mini_val_frac</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">n_bootstrapping</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">guide_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">predictor_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
@@ -1251,7 +1251,7 @@ An empty dictionary is used during the creation by default.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\debiasing\debiaseddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/debiasing/debiaseddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
@@ -1361,7 +1361,7 @@ An empty dictionary is used during the creation by default.</p></td>
 
 
 
-<h3 id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.learn_importance_coefficients" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.learn_importance_coefficients">
 <code class="highlight language-python"><span class="n">learn_importance_coefficients</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">savedir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
@@ -1446,7 +1446,7 @@ DebiasedDTA training framework imposes no restriction on the representation type
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\debiasing\debiaseddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/debiasing/debiaseddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
 <span class="normal"> 86</span>
 <span class="normal"> 87</span>
@@ -1638,7 +1638,7 @@ DebiasedDTA training framework imposes no restriction on the representation type
 
 
 
-<h3 id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.save_importance_coefficients" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.save_importance_coefficients">
 <code class="highlight language-python"><span class="n">save_importance_coefficients</span><span class="p">(</span><span class="n">interactions</span><span class="p">,</span> <span class="n">importance_coefficients</span><span class="p">,</span> <span class="n">savedir</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1698,7 +1698,7 @@ ligand, chemical, and affinity score.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\debiasing\debiaseddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/debiasing/debiaseddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
@@ -1754,7 +1754,7 @@ ligand, chemical, and affinity score.</p></td>
 
 
 
-<h3 id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.debiasing.debiaseddta.DebiasedDTA.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">val_ligands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_proteins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coeffs_save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
@@ -1871,7 +1871,7 @@ DebiasedDTA training framework imposes no restriction on the representation type
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\debiasing\debiaseddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/debiasing/debiaseddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">177</span>
 <span class="normal">178</span>
 <span class="normal">179</span>

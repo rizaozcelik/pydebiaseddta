@@ -1044,7 +1044,7 @@ Abstract classes are also available to quickly train a custom DTA prediction mod
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.Predictor" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor">
         <code>Predictor</code>
 
 
@@ -1064,7 +1064,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1193,7 +1193,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.Predictor.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1232,7 +1232,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
@@ -1262,7 +1262,7 @@ and therefore, <code>Predictor</code> can be inherited to debias custom DTA pred
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.Predictor.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.Predictor.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">val_ligands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_proteins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weights_by_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1371,7 +1371,7 @@ However, the training procedure must support sample weighting in every epoch.</p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -1461,7 +1461,7 @@ However, the training procedure must support sample weighting in every epoch.</p
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor">
         <code>TFPredictor</code>
 
 
@@ -1480,7 +1480,7 @@ Model training, prediction, and save/load functions are inherited from this clas
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 90</span>
 <span class="normal"> 91</span>
 <span class="normal"> 92</span>
@@ -1850,7 +1850,7 @@ Model training, prediction, and save/load functions are inherited from this clas
             <span class="k">if</span> <span class="n">val_tuple</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">val_stats</span> <span class="o">=</span> <span class="n">evaluate_predictions</span><span class="p">(</span>
                     <span class="n">y_true</span><span class="o">=</span><span class="n">val_labels</span><span class="p">,</span>
-                    <span class="n">y_preds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">val_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="n">y_preds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val_ligands</span><span class="p">,</span> <span class="n">val_proteins</span><span class="p">),</span>
                     <span class="n">metrics</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">val_stats_over_epochs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">val_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1919,7 +1919,7 @@ Model training, prediction, and save/load functions are inherited from this clas
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1979,7 +1979,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
@@ -2027,7 +2027,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
@@ -2043,7 +2043,7 @@ The constructor sets the common attributes and call the <code>build</code> funct
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span>
@@ -2065,7 +2065,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.from_file" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.from_file">
 <code class="highlight language-python"><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2123,7 +2123,7 @@ All attributes, including the model weights, are loaded.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
@@ -2183,7 +2183,7 @@ All attributes, including the model weights, are loaded.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.predict" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.predict">
 <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">ligands</span><span class="p">,</span> <span class="n">proteins</span><span class="p">)</span></code>
 
 </h3>
@@ -2247,7 +2247,7 @@ All attributes, including the model weights, are loaded.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">262</span>
 <span class="normal">263</span>
 <span class="normal">264</span>
@@ -2295,7 +2295,7 @@ All attributes, including the model weights, are loaded.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.save" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.save">
 <code class="highlight language-python"><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 </h3>
@@ -2331,7 +2331,7 @@ All attributes, including the model weights, are saved.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
@@ -2377,7 +2377,7 @@ All attributes, including the model weights, are saved.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">val_ligands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_proteins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sample_weights_by_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
@@ -2497,7 +2497,7 @@ By default <code>None</code> and no weighting is used.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">164</span>
 <span class="normal">165</span>
 <span class="normal">166</span>
@@ -2680,7 +2680,7 @@ By default <code>None</code> and no weighting is used.</p></td>
         <span class="k">if</span> <span class="n">val_tuple</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">val_stats</span> <span class="o">=</span> <span class="n">evaluate_predictions</span><span class="p">(</span>
                 <span class="n">y_true</span><span class="o">=</span><span class="n">val_labels</span><span class="p">,</span>
-                <span class="n">y_preds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">val_tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="n">y_preds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">val_ligands</span><span class="p">,</span> <span class="n">val_proteins</span><span class="p">),</span>
                 <span class="n">metrics</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">val_stats_over_epochs</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">val_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -2701,7 +2701,7 @@ By default <code>None</code> and no weighting is used.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2717,7 +2717,7 @@ By default <code>None</code> and no weighting is used.</p></td>
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
@@ -2739,7 +2739,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.TFPredictor.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">proteins</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -2755,7 +2755,7 @@ Every child has to implement this function.</p>
 Every child has to implement this function.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
@@ -2786,7 +2786,7 @@ Every child has to implement this function.</p>
 
 
 
-<h2 id="pydebiaseddta.predictors.abstract_predictors.create_uniform_weights" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.abstract_predictors.create_uniform_weights">
 <code class="highlight language-python"><span class="n">create_uniform_weights</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">)</span></code>
 
 </h2>
@@ -2850,7 +2850,7 @@ Every child has to implement this function.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\abstract_predictors.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/abstract_predictors.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -2919,7 +2919,7 @@ Every child has to implement this function.</p>
 
 
 
-<h2 id="pydebiaseddta.predictors.deepdta.DeepDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA">
         <code>DeepDTA</code>
 
 
@@ -2933,7 +2933,7 @@ Every child has to implement this function.</p>
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -3322,7 +3322,7 @@ Every child has to implement this function.</p>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">max_smi_len</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_prot_len</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">smi_filter_len</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prot_filter_len</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
 
 </h3>
@@ -3442,7 +3442,7 @@ Longer sequences are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -3552,7 +3552,7 @@ Longer sequences are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
 
 </h3>
@@ -3581,7 +3581,7 @@ Longer sequences are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
 <span class="normal"> 73</span>
 <span class="normal"> 74</span>
@@ -3775,7 +3775,7 @@ Longer sequences are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -3829,7 +3829,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
@@ -3881,7 +3881,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
 
 
 
-<h3 id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.deepdta.DeepDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -3935,7 +3935,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\deepdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/deepdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
@@ -4015,7 +4015,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h2 id="pydebiaseddta.predictors.bpedta.BPEDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA">
         <code>BPEDTA</code>
 
 
@@ -4029,7 +4029,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -4408,7 +4408,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">max_smi_len</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_prot_len</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">num_filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">smi_filter_len</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prot_filter_len</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span></code>
 
 </h3>
@@ -4528,7 +4528,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -4638,7 +4638,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
 
 </h3>
@@ -4667,7 +4667,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
 <span class="normal"> 73</span>
 <span class="normal"> 74</span>
@@ -4855,7 +4855,7 @@ Amino-acid sequences that contain more proteins words are truncated.</p></td>
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -4909,7 +4909,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
@@ -4957,7 +4957,7 @@ Truncation and padding are also applied to prepare ligands for training and/or p
 
 
 
-<h3 id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.bpedta.BPEDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -5011,7 +5011,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\bpedta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/bpedta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
 <span class="normal">183</span>
 <span class="normal">184</span>
@@ -5091,7 +5091,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h2 id="pydebiaseddta.predictors.lmdta.LMDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA">
         <code>LMDTA</code>
 
 
@@ -5105,7 +5105,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 15</span>
 <span class="normal"> 16</span>
 <span class="normal"> 17</span>
@@ -5380,7 +5380,7 @@ Truncation and padding are also applied to prepare proteins for training and/or 
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span></code>
 
 </h3>
@@ -5438,7 +5438,7 @@ A fully-connected neural network with two layers is used afterwards to predict a
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -5504,7 +5504,7 @@ A fully-connected neural network with two layers is used afterwards to predict a
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.build" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.build">
 <code class="highlight language-python"><span class="n">build</span><span class="p">()</span></code>
 
 </h3>
@@ -5533,7 +5533,7 @@ A fully-connected neural network with two layers is used afterwards to predict a
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
@@ -5591,7 +5591,7 @@ A fully-connected neural network with two layers is used afterwards to predict a
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.get_chemberta_embedding" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.get_chemberta_embedding">
 <code class="highlight language-python"><span class="n">get_chemberta_embedding</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -5649,7 +5649,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
@@ -5695,7 +5695,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.get_protbert_embedding" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.get_protbert_embedding">
 <code class="highlight language-python"><span class="n">get_protbert_embedding</span><span class="p">(</span><span class="n">aa_sequence</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -5753,7 +5753,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
@@ -5803,7 +5803,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -5856,7 +5856,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
 <span class="normal"> 90</span>
 <span class="normal"> 91</span>
@@ -5898,7 +5898,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
 
 
 
-<h3 id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.predictors.lmdta.LMDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -5951,7 +5951,7 @@ Since the creating the vector is computation-heavy, an <code>lru_cache</code> of
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\predictors\lmdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/predictors/lmdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>

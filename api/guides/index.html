@@ -824,7 +824,7 @@ The implemented guides are IDDTA and BoWDTA, and an abstract classes is also ava
 
 
 
-<h2 id="pydebiaseddta.guides.abstract_guide.Guide" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.guides.abstract_guide.Guide">
         <code>Guide</code>
 
 
@@ -844,7 +844,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\guides\abstract_guide.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/guides/abstract_guide.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
 <span class="normal"> 6</span>
 <span class="normal"> 7</span>
@@ -947,7 +947,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
 
-<h3 id="pydebiaseddta.guides.abstract_guide.Guide.predict" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.abstract_guide.Guide.predict">
 <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">ligands</span><span class="p">,</span> <span class="n">proteins</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1014,7 +1014,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\abstract_guide.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/abstract_guide.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
@@ -1058,7 +1058,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
 
-<h3 id="pydebiaseddta.guides.abstract_guide.Guide.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.abstract_guide.Guide.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
@@ -1117,7 +1117,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\abstract_guide.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/abstract_guide.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
@@ -1193,7 +1193,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
 
-<h2 id="pydebiaseddta.guides.bowdta.BoWDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA">
         <code>BoWDTA</code>
 
 
@@ -1207,7 +1207,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 17</span>
 <span class="normal"> 18</span>
 <span class="normal"> 19</span>
@@ -1502,7 +1502,7 @@ and therefore, <code>Guide</code> can be inherited to design custom guide models
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
 
 </h3>
@@ -1516,7 +1516,7 @@ and uses a decision tree for prediction. BoWDTA uses the same biomolecule vocabu
 as BPEDTA.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -1552,7 +1552,7 @@ as BPEDTA.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.predict" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.predict">
 <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">ligands</span><span class="p">,</span> <span class="n">proteins</span><span class="p">)</span></code>
 
 </h3>
@@ -1615,7 +1615,7 @@ as BPEDTA.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
@@ -1675,7 +1675,7 @@ as BPEDTA.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.tokenize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.tokenize_ligands">
 <code class="highlight language-python"><span class="n">tokenize_ligands</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span></code>
 
 </h3>
@@ -1728,7 +1728,7 @@ as BPEDTA.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
@@ -1774,7 +1774,7 @@ as BPEDTA.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.tokenize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.tokenize_proteins">
 <code class="highlight language-python"><span class="n">tokenize_proteins</span><span class="p">(</span><span class="n">aa_sequences</span><span class="p">)</span></code>
 
 </h3>
@@ -1827,7 +1827,7 @@ as BPEDTA.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -1867,7 +1867,7 @@ as BPEDTA.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span></code>
 
 </h3>
@@ -1924,7 +1924,7 @@ decision tree is used for affinity prediction.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
@@ -1990,7 +1990,7 @@ decision tree is used for affinity prediction.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">smiles_words</span><span class="p">)</span></code>
 
 </h3>
@@ -2043,7 +2043,7 @@ decision tree is used for affinity prediction.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
@@ -2085,7 +2085,7 @@ decision tree is used for affinity prediction.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.bowdta.BoWDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.bowdta.BoWDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">protein_words</span><span class="p">)</span></code>
 
 </h3>
@@ -2138,7 +2138,7 @@ decision tree is used for affinity prediction.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\bowdta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/bowdta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
@@ -2214,7 +2214,7 @@ decision tree is used for affinity prediction.</p>
 
 
 
-<h2 id="pydebiaseddta.guides.iddta.IDDTA" class="doc doc-heading">
+<h2 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA">
         <code>IDDTA</code>
 
 
@@ -2228,7 +2228,7 @@ decision tree is used for affinity prediction.</p>
 
 
         <details class="quote">
-          <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+          <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
           <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 13</span>
 <span class="normal"> 14</span>
 <span class="normal"> 15</span>
@@ -2425,7 +2425,7 @@ decision tree is used for affinity prediction.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.iddta.IDDTA.__init__" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA.__init__">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
 
 </h3>
@@ -2438,7 +2438,7 @@ IDDTA represents the proteins and ligands with one-hot vectors of their identiti
 and uses a decision tree for prediction.</p>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -2464,7 +2464,7 @@ and uses a decision tree for prediction.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.iddta.IDDTA.predict" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA.predict">
 <code class="highlight language-python"><span class="n">predict</span><span class="p">(</span><span class="n">ligands</span><span class="p">,</span> <span class="n">proteins</span><span class="p">)</span></code>
 
 </h3>
@@ -2527,7 +2527,7 @@ and uses a decision tree for prediction.</p>
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 83</span>
 <span class="normal"> 84</span>
 <span class="normal"> 85</span>
@@ -2575,7 +2575,7 @@ and uses a decision tree for prediction.</p>
 
 
 
-<h3 id="pydebiaseddta.guides.iddta.IDDTA.train" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA.train">
 <code class="highlight language-python"><span class="n">train</span><span class="p">(</span><span class="n">train_ligands</span><span class="p">,</span> <span class="n">train_proteins</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span></code>
 
 </h3>
@@ -2631,7 +2631,7 @@ one-hot-encoding of their identities and applies decision tree for affinity pred
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
 <span class="normal">56</span>
 <span class="normal">57</span>
@@ -2695,7 +2695,7 @@ one-hot-encoding of their identities and applies decision tree for affinity pred
 
 
 
-<h3 id="pydebiaseddta.guides.iddta.IDDTA.vectorize_ligands" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA.vectorize_ligands">
 <code class="highlight language-python"><span class="n">vectorize_ligands</span><span class="p">(</span><span class="n">ligands</span><span class="p">)</span></code>
 
 </h3>
@@ -2748,7 +2748,7 @@ one-hot-encoding of their identities and applies decision tree for affinity pred
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -2788,7 +2788,7 @@ one-hot-encoding of their identities and applies decision tree for affinity pred
 
 
 
-<h3 id="pydebiaseddta.guides.iddta.IDDTA.vectorize_proteins" class="doc doc-heading">
+<h3 class="doc doc-heading" id="pydebiaseddta.guides.iddta.IDDTA.vectorize_proteins">
 <code class="highlight language-python"><span class="n">vectorize_proteins</span><span class="p">(</span><span class="n">proteins</span><span class="p">)</span></code>
 
 </h3>
@@ -2841,7 +2841,7 @@ one-hot-encoding of their identities and applies decision tree for affinity pred
   </table>
 
       <details class="quote">
-        <summary>Source code in <code>pydebiaseddta\guides\iddta.py</code></summary>
+        <summary>Source code in <code>pydebiaseddta/guides/iddta.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
