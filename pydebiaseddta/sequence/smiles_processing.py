@@ -91,7 +91,7 @@ def learn_unichar_encoding(smiles_corpus: List[str]) -> Dict:
 
 def load_smiles_to_unichar_encoding() -> Dict[str, str]:
     return load_json(
-        f"{package_path}/data/word_identification/chemical/chembl27_encoding.json"
+        f"{package_path}/data/word_identification/ligand/chembl27_encoding.json"
     )
 
 

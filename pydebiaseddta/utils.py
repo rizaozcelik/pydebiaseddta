@@ -19,7 +19,7 @@ def load_sample_dta_data(mini: bool = False) -> Dict[str, List]:
     -------
     Dict[str, List]
         The dictionary has three keys: `"train"`, `"val"`, and `"test"`, each corresponding to different folds of the dataset.
-        Each key maps to a list with three elements: *list of chemicals*, *list of proteins*, and *list of affinity scores*. 
+        Each key maps to a list with three elements: *list of ligands*, *list of proteins*, and *list of affinity scores*. 
         The elements in the same index of the lists correspond to a drug-target affinity measurement.
     """
     sample_data_path = f"{package_path}/data/dta_sample_data/dta_sample_data.json"

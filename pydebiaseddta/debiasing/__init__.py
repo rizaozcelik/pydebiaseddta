@@ -23,7 +23,7 @@ and calls it the "importance coefficient" of a protein-ligand pair. The importan
 into training weights.
 
 In the DebiasedDTA training framework, the predictor is the model that will be trained with the training samples weighted
-by the guide to ultimately predict target protein-chemical affinities. The predictor can adopt any biomolecule representation,
+by the guide to ultimately predict target protein-ligand affinities. The predictor can adopt any biomolecule representation,
 but has to be able to weight the training samples during training to comply with the weight adaptation strategy proposed in DebiasedDTA.
 
 The proposed strategy initializes the training sample weights to 1 and updates them at each epoch such that the

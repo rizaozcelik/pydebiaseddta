@@ -1,9 +1,11 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
+from pathlib import Path
 import json
 from abc import ABC, abstractmethod
 
 import numpy as np
 import tensorflow as tf
+tf.get_logger().setLevel('ERROR')
 
 from ..evaluation import evaluate_predictions
 import pandas as pd
@@ -56,7 +58,7 @@ class Predictor(ABC):
         train_ligands: List[Any],
         train_proteins: List[Any],
         train_labels: List[float],
-        val_splits: Dict[str, List[List[str], List[str], List[float]]] = {},
+        val_splits: Dict[str, List[Union[List[str], List[float]]]] = {},
         sample_weights_by_epoch: List[np.array] = None,
     ) -> Any:
         """An abstract method to train DTA prediction models.
@@ -71,7 +73,7 @@ class Predictor(ABC):
             The training proteins as a List.
         train_labels : List[float]
             Affinity scores of the training protein-compound pairs
-        val_splits : Dict[str, List[List[str], List[str], List[float]]], optional
+        val_splits : Dict[str, List[Union[List[str], List[float]]]], optional
             Dictionary that includes all desired validation splits. Keys denote the split name e.g.
             val_cold_both, and values include a list that include the ligands, proteins, and labels
             for the said split, in the style of the training lists provided to this function.
@@ -97,7 +99,7 @@ class TFPredictor(Predictor):
     """
 
     @abstractmethod
-    def __init__(self, n_epochs: int, learning_rate: float, batch_size: int, **kwargs):
+    def __init__(self, n_epochs: int, learning_rate: float, batch_size: int, seed: int = 0, **kwargs):
         """An abstract constructor for BPE-DTA, LM-DTA, and DeepDTA.
         The constructor sets the common attributes and call the `build` function.  
 
@@ -114,6 +116,7 @@ class TFPredictor(Predictor):
         self.learning_rate = learning_rate
         self.batch_size = batch_size
         self.history = dict()
+        tf.random.set_seed(seed)
         self.model = self.build()
 
     @abstractmethod
@@ -168,9 +171,10 @@ class TFPredictor(Predictor):
         train_ligands: List[str],
         train_proteins: List[str],
         train_labels: List[float],
-        val_splits: Dict[str, List[List[str], List[str], List[float]]] = {},
+        val_splits: Dict[str, List[Union[List[str], List[float]]]] = {},
         sample_weights_by_epoch: List[np.array] = None,
         metrics_tracked: List[str] = ["mse", "mae"],
+        seed: int = 0,
     ) -> Dict:
         """The common model training procedure for BPE-DTA, LM-DTA, and DeepDTA.
         The models adopt different biomolecule representation methods and model architectures,
@@ -185,7 +189,7 @@ class TFPredictor(Predictor):
             Amino-acid sequences of the training proteins.
         train_labels : List[float]
             Affinity scores of the training protein-ligand pairs.
-        val_splits : Dict[str, List[List[str], List[str], List[float]]], optional
+        val_splits : Dict[str, List[Union[List[str], List[float]]]], optional
             Dictionary that includes all desired validation splits. Keys denote the split name e.g.
             val_cold_both, and values include a list that include the ligands, proteins, and labels
             for the said split, in the style of the training lists provided to this function.
@@ -198,12 +202,18 @@ class TFPredictor(Predictor):
         metrics_tracked : List[str], optional
             List of metrics that are tracked during training. Available options are
             "mse", "rmse", "mae", "r2", "ci".
+        seed : int, optional
+            Seed for the training procedure.
 
         Returns
         -------
         Dict
             Training history.
         """
+        tf.random.set_seed(seed)
+        if self.model_folder:
+            Path(self.model_folder).mkdir(parents=True, exist_ok=True)
+
         if sample_weights_by_epoch is None:
             sample_weights_by_epoch = create_uniform_weights(
                 len(train_ligands), self.n_epochs
@@ -215,7 +225,6 @@ class TFPredictor(Predictor):
 
         train_stats_over_epochs = {metric: [] for metric in metrics_tracked}
         val_stats_over_epochs = {split: {metric: [] for metric in metrics_tracked} for split in val_splits.keys()}
-
         assert self.early_stopping_metric in ["mse", "mae"]
         best_metric = 1e6
         best_metric_epoch = 0
@@ -227,7 +236,6 @@ class TFPredictor(Predictor):
                 batch_size=self.batch_size,
                 epochs=1,
             )
-
             train_stats = evaluate_predictions(
                 gold_truths=train_labels,
                 predictions=self.predict(train_ligands, train_proteins),
@@ -254,7 +262,7 @@ class TFPredictor(Predictor):
                         self.model.save(self.model_folder + "model")
                 else:
                     if (e > self.min_epochs) and ((e - best_metric_epoch) == self.early_stopping_num_epochs):
-                        print(f"Early stopping due to no increase to MSE in {self.early_stopping_split} split for {self.early_stopping_num_epochs} epochs.")
+                        print(f"Early stopping due to no increase to {self.early_stopping_metric} in {self.early_stopping_split} split for {self.early_stopping_num_epochs} epochs.")
                         if self.model_folder:
                             self.model = tf.keras.models.load_model(self.model_folder+"model")
                             print(f"Retrieved the saved best model.")
@@ -274,7 +282,7 @@ class TFPredictor(Predictor):
 
         self.history["train"] = train_stats_over_epochs
         if val_stats_over_epochs is not None:
-            self.history["val"] = val_stats_over_epochs
+            self.history["val_splits"] = val_stats_over_epochs
 
         return self.history
 

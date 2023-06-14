@@ -12,8 +12,8 @@ from ..sequence.smiles_processing import (
     smiles_to_unichar_batch,
     load_smiles_to_unichar_encoding,
 )
-VOCAB_SIZES_LIGAND = {"high": 8000, "mid": 400, "low":94}
-VOCAB_SIZES_PROTEIN = {"high": 32000, "mid": 1600, "low":26}
+VOCAB_SIZES_LIGAND = {"high": 8000, "low":94}
+VOCAB_SIZES_PROTEIN = {"high": 32000, "low":26}
 
 class BoWDTA(Guide):
     def __init__(

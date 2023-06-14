@@ -36,6 +36,7 @@ class DeepDTA(TFPredictor):
         model_folder: str = "",
         optimizer: str = "adam",
         min_epochs: int = 0,
+        seed: int = 0,
     ):
         """Constructor to create a DeepDTA instance.
         DeepDTA segments SMILES strings of ligands and amino-acid sequences of proteins into characters,
@@ -84,6 +85,8 @@ class DeepDTA(TFPredictor):
             The optimizer used in training. Available options are "adam" and "sgd".
         min_epochs : int, optional
             Initial number of epochs for which the early stopping computations will be overrided.
+        seed : int, optional
+            Seed for the initialized model.
         """    
         self.max_smi_len = max_smi_len
         self.max_prot_len = max_prot_len
@@ -92,10 +95,6 @@ class DeepDTA(TFPredictor):
         self.smi_filter_len = smi_filter_len
         self.prot_filter_len = prot_filter_len
 
-        self.chem_vocab_size = 94
-        self.prot_vocab_size = 26
-        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size)
-
         self.optimizer = optimizer
         self.early_stopping_metric = early_stopping_metric
         self.early_stopping_metric_threshold = early_stopping_metric_threshold
@@ -103,6 +102,10 @@ class DeepDTA(TFPredictor):
         self.early_stopping_split = early_stopping_split
         self.min_epochs = min_epochs
         self.model_folder = model_folder
+
+        self.chem_vocab_size = 94
+        self.prot_vocab_size = 26
+        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size, seed=seed)
 
     def build(self):
         """Builds a `DeepDTA` predictor in `keras` with the parameters specified during construction.

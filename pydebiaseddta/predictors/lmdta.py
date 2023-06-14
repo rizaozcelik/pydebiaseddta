@@ -1,6 +1,8 @@
 import re
 from functools import lru_cache
 from typing import List
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import numpy as np
 import transformers
@@ -25,6 +27,7 @@ class LMDTA(TFPredictor):
             model_folder: str = "",
             optimizer: str = "adam",
             min_epochs: int = 0,
+            seed: int = 0,
             ):
         """Constructor to create a LMDTA instance.
         LMDTA represents ligands and proteins with pre-trained language model embeddings
@@ -59,7 +62,17 @@ class LMDTA(TFPredictor):
             The optimizer used in training. Available options are "adam" and "sgd".
         min_epochs : int, optional
             Initial number of epochs for which the early stopping computations will be overrided.
+        seed : int, optional
+            Seed for the initialized model.
         """
+        self.optimizer = optimizer
+        self.early_stopping_metric = early_stopping_metric
+        self.early_stopping_metric_threshold = early_stopping_metric_threshold
+        self.early_stopping_num_epochs = early_stopping_num_epochs
+        self.early_stopping_split = early_stopping_split
+        self.min_epochs = min_epochs
+        self.model_folder = model_folder
+
         transformers.logging.set_verbosity(transformers.logging.CRITICAL)
         self.ligand_tokenizer = AutoTokenizer.from_pretrained(
             "seyonec/PubChem10M_SMILES_BPE_450k"
@@ -70,15 +83,7 @@ class LMDTA(TFPredictor):
             "Rostlab/prot_bert", do_lower_case=False
         )
         self.protbert = AutoModel.from_pretrained("Rostlab/prot_bert")
-        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size)
-
-        self.optimizer = optimizer
-        self.early_stopping_metric = early_stopping_metric
-        self.early_stopping_metric_threshold = early_stopping_metric_threshold
-        self.early_stopping_num_epochs = early_stopping_num_epochs
-        self.early_stopping_split = early_stopping_split
-        self.min_epochs = min_epochs
-        self.model_folder = model_folder
+        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size, seed=seed)
 
     def build(self):
         """Builds a `LMDTA` predictor in `keras` with the parameters specified during construction.
