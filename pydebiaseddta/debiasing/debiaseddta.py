@@ -5,6 +5,9 @@ import numpy as np
 
 from pydebiaseddta import guides, predictors
 
+import pandas as pd
+from ..utils import get_ranks
+
 
 class DebiasedDTA:
     def __init__(
@@ -15,6 +18,13 @@ class DebiasedDTA:
         n_bootstrapping: int = 10,
         guide_params: Dict = None,
         predictor_params: Dict = None,
+        guide_error_exponent: float = 2.,
+        weight_temperature: float = 1.,
+        weight_tempering_exponent: float = 1.,
+        weight_tempering_num_epochs: int = int(1e6),
+        weight_prior: float = 0.01,
+        weight_rank_based: bool = False,
+        results_folder: str = "",
     ):
         """Constructor to initiate a DebiasedDTA training framework. 
         
@@ -39,6 +49,26 @@ class DebiasedDTA:
             The dictionary should map the name of the constructor parameters to their values, and
             `n_epochs` **must** be among the parameters for debiasing to work.
             An empty dictionary is used during the creation by default.
+        guide_error_exponent : float, optional
+            Exponent for computing the errors incurred by guide's predictions.
+        weight_temperature : float, optional
+            Temperature parameter for importance weights. After weights are
+            prepared, they are exponentiated by 1/weight_temperature and 
+            renormalized.
+        weight_tempering_exponent : float, optional
+            Controls the speed of tempering process. Lower numbers lead to quicker transition from uniform
+            to computed importance weights.
+        weight_tempering_num_epochs : int, optional
+            Controls the total number of epochs in which to transition to computed importance weights.
+            Especially relevant when early stopping is desired.
+        weight_prior : float, optional
+            Adds the given ratio of the maximum importance weight to all importance weights, i.e., sets importance
+            weights to importance_weights + importance_weights.max() * weight_prior.
+        weight_rank_based : bool, optional
+            Instead of computing weights as directly proportional to guide error, setting them to percentile ranks
+            of the errors of training inputs.
+        results_folder : str, optional
+            Folder for saving the results of the training.
 
         Raises
         ------
@@ -58,38 +88,48 @@ class DebiasedDTA:
                 'The predictor must have a field named "n_epochs" to be debiased'
             )
 
+        self.results_folder = results_folder        
+        self.guide_error_exponent = guide_error_exponent    
+        self.weight_tempering_exponent = weight_tempering_exponent
+        self.weight_tempering_num_epochs = weight_tempering_num_epochs
+        self.weight_temperature = weight_temperature
+        self.weight_prior = weight_prior
+        self.weight_rank_based=weight_rank_based
+        self.predictor_instance = self.predictor_cls(**predictor_params)
+
     @staticmethod
-    def save_importance_coefficients(
-        interactions: List[Tuple[int, Any, Any, float]], importance_coefficients: List[float], savedir: str
+    def save_importance_weights(
+        interactions: List[Tuple[int, Any, Any, float]], importance_weights: List[float], weights_save_path: str
     ):
-        """Saves the importance coefficients learned by the `guide`.
+        """Saves the importance weights learned by the `guide`.
 
         Parameters
         ----------
         interactions : List[Tuple[int, Any, Any, float]]
             The List of training interactions as a Tuple of interaction id (assigned by the guide),
             ligand, chemical, and affinity score.
-        importance_coefficients : List[float]
-            The importance coefficient for each interaction.
-        savedir : str
-            Path to save the coefficients.
+        importance_weights : List[float]
+            The importance weight for each interaction.
+        weights_save_path : str
+            Path to save the weights.
         """    
         dump_content = []
         for interaction_id, ligand, protein, label in interactions:
-            importance_coefficient = importance_coefficients[interaction_id]
-            dump_content.append(f"{ligand},{protein},{label},{importance_coefficient}")
+            importance_weight = importance_weights[interaction_id]
+            dump_content.append(f"{ligand},{protein},{label},{importance_weight}")
         dump = "\n".join(dump_content)
-        with open(savedir) as f:
+        with open(weights_save_path, "w") as f:
             f.write(dump)
 
-    def learn_importance_coefficients(
+    def learn_importance_weights(
         self,
         train_ligands: List[Any],
         train_proteins: List[Any],
         train_labels: List[float],
-        savedir: str = None,
+        weights_save_path: str = None,
+        weights_load_path = None
     ) -> List[float]:
-        """Learns importance coefficients using the `Guide` model specified during the construction.
+        """Learns importance weights using the `Guide` model specified during the construction.
 
         Parameters
         ----------
@@ -101,24 +141,35 @@ class DebiasedDTA:
             DebiasedDTA training framework imposes no restriction on the representation type of the proteins.
         train_labels : List[float]
             Affinity scores of the training protein-ligand pairs.
-        savedir : str, optional
-            Path to save the learned importance coefficients. By default `None` and the coefficients are not saved.
+        weights_save_path : str, optional
+            Path to save the learned importance weights. By default `None` and the weights are not saved.
+        weights_load_path : str, optional
+            Path to load previously computed importance weights. By default `None` and the weights are newly computed.
 
         Returns
         -------
         List[float]
-            The importance coefficients learned by the guide.
+            The importance weights learned by the guide.
         """
         train_size = len(train_ligands)
         train_interactions = list(
             zip(range(train_size), train_ligands, train_proteins, train_labels,)
         )
         mini_val_data_size = int(train_size * self.mini_val_frac) + 1
-        interaction_id_to_sq_diff = [[] for _ in range(train_size)]
+        all_mini_val_errors = [[] for _ in range(train_size)]
+
+        assert self.mini_val_frac > 0
+        
+        if weights_load_path:
+            return pd.read_csv(weights_load_path).loc[:, 3].values
+        
+        if self.guide_cls is None:
+            return [1 for i in range(len(train_ligands))]
 
         for _ in range(self.n_bootstrapping):
             random.shuffle(train_interactions)
             n_mini_val = int(1 / self.mini_val_frac)
+            assert n_mini_val > 1
             for mini_val_ix in range(n_mini_val):
                 val_start_ix = mini_val_ix * mini_val_data_size
                 val_end_ix = val_start_ix + mini_val_data_size
@@ -141,51 +192,42 @@ class DebiasedDTA:
                     mini_train_ligands, mini_train_proteins, mini_train_labels,
                 )
 
-                mini_val_ligands = [
-                    interaction[1] for interaction in mini_val_interactions
-                ]
-                mini_val_proteins = [
-                    interaction[2] for interaction in mini_val_interactions
-                ]
-                preds = guide_instance.predict(mini_val_ligands, mini_val_proteins)
-                mini_val_labels = [
-                    interaction[3] for interaction in mini_val_interactions
-                ]
-                mini_val_sq_diffs = (np.array(mini_val_labels) - np.array(preds)) ** 2
-                mini_val_interaction_ids = [
-                    interaction[0] for interaction in mini_val_interactions
-                ]
-                for interaction_id, sq_diff in zip(
-                    mini_val_interaction_ids, mini_val_sq_diffs
-                ):
-                    interaction_id_to_sq_diff[interaction_id].append(sq_diff)
+                mini_val_interaction_ids, mini_val_ligands, mini_val_proteins, mini_val_labels = [
+                    [interaction[i] for interaction in mini_val_interactions] for i in range(4)
+                    ]
+                mini_val_preds = guide_instance.predict(mini_val_ligands, mini_val_proteins)
+                mini_val_errors = np.abs(np.array(mini_val_labels) - np.array(mini_val_preds)) ** self.guide_error_exponent
+                for interaction_id, val_error in zip(mini_val_interaction_ids, mini_val_errors):
+                    all_mini_val_errors[interaction_id].append(val_error)
+        
+        assert all([len(mini_val_errors) == self.n_bootstrapping for mini_val_errors in all_mini_val_errors])
 
-        interaction_id_to_med_diff = [
-            np.median(diffs) for diffs in interaction_id_to_sq_diff
-        ]
-        importance_coefficients = [
-            med / sum(interaction_id_to_med_diff) for med in interaction_id_to_med_diff
-        ]
+        importance_weights = np.array([np.median(errors) for errors in all_mini_val_errors])
+        if self.weight_rank_based:
+            importance_weights = get_ranks(importance_weights)
 
-        if savedir is not None:
-            DebiasedDTA.save_importance_coefficients(
-                train_interactions, importance_coefficients, savedir
+        importance_weights += importance_weights.max() * self.weight_prior
+        importance_weights = importance_weights ** (1/self.weight_temperature)
+    
+        importance_weights = list((importance_weights / importance_weights.sum()) * len(importance_weights))
+
+        if weights_save_path is not None:
+            DebiasedDTA.save_importance_weights(
+                train_interactions, importance_weights, weights_save_path
             )
-
-        return importance_coefficients
+        return importance_weights
 
     def train(
         self,
         train_ligands: List[Any],
         train_proteins: List[Any],
         train_labels: List[float],
-        val_ligands: List[Any] = None,
-        val_proteins: List[Any] = None,
-        val_labels: List[float] = None,
-        coeffs_save_path: str = None,
+        val_splits: Dict[str, List[List[str], List[str], List[float]]] = {},
+        weights_save_path: str = None,
+        weights_load_path: str = None,  
     ) -> Any:
         """Starts the DebiasedDTA training framework.
-        The importance coefficients are learned with the guide and used to weight the samples during the predictor's training.
+        The importance weights are learned with the guide and used to weight the samples during the predictor's training.
         Performance on the validation set is also measured, if provided.
         Parameters
         ----------
@@ -197,14 +239,15 @@ class DebiasedDTA:
             DebiasedDTA training framework imposes no restriction on the representation type of the proteins.
         train_labels : List[float]
             Affinity scores of the training protein-ligand pairs.
-        val_ligands : List[Any], optional
-            Validation ligands to measure predictor performance, by default `None` and no validation is applied.
-        val_proteins : List[Any], optional
-            Validation proteins to measure predictor performance, by default `None` and no validation is applied.
-        val_labels : List[float], optional
-            Affinity scores of the Validatio pairs, by default `None` and no validation is applied.
-        coeffs_save_path : str, optional
-            Path to save importance coefficients learned by the `guide`. Defaults to `None` and no saving is performed.
+        val_splits : Dict[str, List[List[str], List[str], List[float]]], optional
+            Dictionary that includes all desired validation splits. Keys denote the split name e.g.
+            val_cold_both, and values include a list that include the ligands, proteins, and labels
+            for the said split, in the style of the training lists provided to this function.
+        weights_save_path : str, optional
+            Path to save the learned importance weights. By default `None` and the weights are not saved.
+        weights_load_path : str, optional
+            Path to load previously computed importance weights. By default `None` and the weights are newly computed.
+
 
         Returns
         -------
@@ -214,35 +257,27 @@ class DebiasedDTA:
         """
         train_ligands = train_ligands.copy()
         train_proteins = train_proteins.copy()
+        assert len(train_ligands) == len(train_proteins)
 
-        importance_coefficients = self.learn_importance_coefficients(
-            train_ligands, train_proteins, train_labels, savedir=coeffs_save_path,
+
+        importance_weights = self.learn_importance_weights(
+            train_ligands,
+            train_proteins,
+            train_labels,
+            weights_save_path=weights_save_path,
+            weights_load_path=weights_load_path,
         )
-
         n_epochs = self.predictor_instance.n_epochs
-        ic = np.array(importance_coefficients)
+        iw = np.array(importance_weights)
+        final_num_tem_epochs = min(n_epochs, self.weight_tempering_num_epochs)
         weights_by_epoch = [
-            1 - (e / n_epochs) + ic * (e / n_epochs) for e in range(n_epochs)
-        ]
-
-        if (
-            val_ligands is not None
-            and val_proteins is not None
-            and val_labels is not None
-        ):
-            return self.predictor_instance.train(
-                train_ligands,
-                train_proteins,
-                train_labels,
-                val_ligands=val_ligands,
-                val_proteins=val_proteins,
-                val_labels=val_labels,
-                sample_weights_by_epoch=weights_by_epoch,
-            )
+            1 - ((min(e, final_num_tem_epochs) / final_num_tem_epochs) ** self.weight_tempering_exponent) + iw * ((min(e, final_num_tem_epochs) / final_num_tem_epochs) ** self.weight_tempering_exponent) for e in range(n_epochs)
+        ] if final_num_tem_epochs > 0.5 else [iw for e in range(n_epochs)]
 
         return self.predictor_instance.train(
             train_ligands,
             train_proteins,
             train_labels,
+            val_splits=val_splits,
             sample_weights_by_epoch=weights_by_epoch,
         )

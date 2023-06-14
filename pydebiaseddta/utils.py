@@ -1,5 +1,7 @@
 from typing import Dict, List
 import json
+import numpy as np
+import pandas as pd
 from . import package_path
 
 
@@ -73,3 +75,19 @@ def load_json(path: str) -> Dict:
     """
     with open(path, "r") as f:
         return json.load(f)
+
+
+def get_ranks(vec: np.ndarray) -> np.ndarray:
+    """Obtains percentile ranks for a vector of observations.
+
+    Parameters
+    ----------
+    vec : np.ndarray
+        An array of real valued observations.
+
+    Returns
+    -------
+    np.array
+        Percentile ranks of the elements of the vector.
+    """
+    return pd.Series(vec).rank(pct=True).values
