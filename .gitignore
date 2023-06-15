@@ -4,5 +4,5 @@ docs/source/_autosummary/*
 dist/*
 **.egg-info/
 .vscode/*
-temp/
 temp*
+temp/
