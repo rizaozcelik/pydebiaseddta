@@ -1,7 +1,7 @@
 from typing import List, Dict
 from itertools import combinations
 
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 
 def ci(gold_truths: List[float], predictions: List[float]) -> float:
@@ -84,6 +84,24 @@ def r2(gold_truths: List[float], predictions: List[float]) -> float:
     return float(r2_score(gold_truths, predictions))
 
 
+def mae(gold_truths: List[float], predictions: List[float]) -> float:
+    """Computes mean absolute error between expected and predicted values.
+
+    Parameters
+    ----------
+    gold_truths : List[float]
+        The gold labels in the dataset.
+    predictions : List[float]
+        Predictions of a model.
+
+    Returns
+    -------
+    float
+        Mean squared error.
+    """
+    return float(mean_absolute_error(gold_truths, predictions))
+
+
 def evaluate_predictions(
     gold_truths: List[float], predictions: List[float], metrics: List[str] = None
 ) -> Dict[str, float]:
@@ -105,8 +123,8 @@ def evaluate_predictions(
         A dictionary that maps each metric name to the computed value.
     """
     if metrics is None:
-        metrics = ["ci", "r2", "rmse", "mse"]
+        metrics = ["ci", "r2", "rmse", "mse", "mae"]
 
     metrics = [metric.lower() for metric in metrics]
-    name_to_fn = {"ci": ci, "r2": r2, "rmse": rmse, "mse": mse}
+    name_to_fn = {"ci": ci, "r2": r2, "rmse": rmse, "mse": mse, "mae": mae}
     return {metric: name_to_fn[metric](gold_truths, predictions) for metric in metrics}

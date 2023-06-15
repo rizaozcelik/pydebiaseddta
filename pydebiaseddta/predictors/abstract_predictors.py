@@ -1,11 +1,14 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
+from pathlib import Path
 import json
 from abc import ABC, abstractmethod
 
 import numpy as np
 import tensorflow as tf
+tf.get_logger().setLevel('ERROR')
 
 from ..evaluation import evaluate_predictions
+import pandas as pd
 
 
 def create_uniform_weights(n_samples: int, n_epochs: int) -> List[np.array]:
@@ -55,9 +58,7 @@ class Predictor(ABC):
         train_ligands: List[Any],
         train_proteins: List[Any],
         train_labels: List[float],
-        val_ligands: List[Any] = None,
-        val_proteins: List[Any] = None,
-        val_labels: List[float] = None,
+        val_splits: Dict[str, List[Union[List[str], List[float]]]] = {},
         sample_weights_by_epoch: List[np.array] = None,
     ) -> Any:
         """An abstract method to train DTA prediction models.
@@ -72,12 +73,15 @@ class Predictor(ABC):
             The training proteins as a List.
         train_labels : List[float]
             Affinity scores of the training protein-compound pairs
-        val_ligands : List[Any], optional
-            Validation ligands as a List, in case validation scores are measured during training, by default `None`
-        val_proteins : List[Any], optional
-            Validation proteins as a List, in case validation scores are measured during training, by default `None`
-        val_labels : List[float], optional
-            Affinity scores of validation protein-compound pairs as a List, in case validation scores are measured during training, by default `None`
+        val_splits : Dict[str, List[Union[List[str], List[float]]]], optional
+            Dictionary that includes all desired validation splits. Keys denote the split name e.g.
+            val_cold_both, and values include a list that include the ligands, proteins, and labels
+            for the said split, in the style of the training lists provided to this function.
+        sample_weights_by_epoch : List[np.array], optional
+            Weight of each training protein-ligand pair during training across epochs.
+            This variable must be a List of size $E$ (number of training epochs),
+            in which each element is a `np.array` of $N\times 1$, where $N$ is the training set size and 
+            each element corresponds to the weight of a training sample.
 
         Returns
         -------
@@ -95,7 +99,7 @@ class TFPredictor(Predictor):
     """
 
     @abstractmethod
-    def __init__(self, n_epochs: int, learning_rate: float, batch_size: int, **kwargs):
+    def __init__(self, n_epochs: int, learning_rate: float, batch_size: int, seed: int = 0, **kwargs):
         """An abstract constructor for BPE-DTA, LM-DTA, and DeepDTA.
         The constructor sets the common attributes and call the `build` function.  
 
@@ -112,6 +116,7 @@ class TFPredictor(Predictor):
         self.learning_rate = learning_rate
         self.batch_size = batch_size
         self.history = dict()
+        tf.random.set_seed(seed)
         self.model = self.build()
 
     @abstractmethod
@@ -166,10 +171,10 @@ class TFPredictor(Predictor):
         train_ligands: List[str],
         train_proteins: List[str],
         train_labels: List[float],
-        val_ligands: List[str] = None,
-        val_proteins: List[str] = None,
-        val_labels: List[float] = None,
+        val_splits: Dict[str, List[Union[List[str], List[float]]]] = {},
         sample_weights_by_epoch: List[np.array] = None,
+        metrics_tracked: List[str] = ["mse", "mae"],
+        seed: int = 0,
     ) -> Dict:
         """The common model training procedure for BPE-DTA, LM-DTA, and DeepDTA.
         The models adopt different biomolecule representation methods and model architectures,
@@ -184,24 +189,31 @@ class TFPredictor(Predictor):
             Amino-acid sequences of the training proteins.
         train_labels : List[float]
             Affinity scores of the training protein-ligand pairs.
-        val_ligands : List[str], optional
-            SMILES strings of the validation ligands, by default None and no validation is used.
-        val_proteins : List[str], optional
-            Amino-acid sequences of the validation proteins, by default None and no validation is used.
-        val_labels : List[float], optional
-            Affinity scores of the validation pairs, by default None and no validation is used.
+        val_splits : Dict[str, List[Union[List[str], List[float]]]], optional
+            Dictionary that includes all desired validation splits. Keys denote the split name e.g.
+            val_cold_both, and values include a list that include the ligands, proteins, and labels
+            for the said split, in the style of the training lists provided to this function.
         sample_weights_by_epoch : List[np.array], optional
             Weight of each training protein-ligand pair during training across epochs.
             This variable must be a List of size $E$ (number of training epochs),
             in which each element is a `np.array` of $N\times 1$, where $N$ is the training set size and 
             each element corresponds to the weight of a training sample.
             By default `None` and no weighting is used.
+        metrics_tracked : List[str], optional
+            List of metrics that are tracked during training. Available options are
+            "mse", "rmse", "mae", "r2", "ci".
+        seed : int, optional
+            Seed for the training procedure.
 
         Returns
         -------
         Dict
             Training history.
         """
+        tf.random.set_seed(seed)
+        if self.model_folder:
+            Path(self.model_folder).mkdir(parents=True, exist_ok=True)
+
         if sample_weights_by_epoch is None:
             sample_weights_by_epoch = create_uniform_weights(
                 len(train_ligands), self.n_epochs
@@ -211,51 +223,66 @@ class TFPredictor(Predictor):
         train_protein_vectors = self.vectorize_proteins(train_proteins)
         train_labels = np.array(train_labels)
 
-        val_tuple = None
-        if (
-            val_ligands is not None
-            and val_proteins is not None
-            and val_labels is not None
-        ):
-            val_ligand_vectors = self.vectorize_ligands(val_ligands)
-            val_protein_vectors = self.vectorize_proteins(val_proteins)
-            val_tuple = (
-                [val_ligand_vectors, val_protein_vectors],
-                np.array(val_labels),
-            )
-
-        train_stats_over_epochs = {"mse": [], "rmse": [], "r2": []}
-        val_stats_over_epochs = train_stats_over_epochs.copy()
+        train_stats_over_epochs = {metric: [] for metric in metrics_tracked}
+        val_stats_over_epochs = {split: {metric: [] for metric in metrics_tracked} for split in val_splits.keys()}
+        assert self.early_stopping_metric in ["mse", "mae"]
+        best_metric = 1e6
+        best_metric_epoch = 0
         for e in range(self.n_epochs):
             self.model.fit(
                 x=[train_ligand_vectors, train_protein_vectors],
                 y=train_labels,
                 sample_weight=sample_weights_by_epoch[e],
-                validation_data=val_tuple,
                 batch_size=self.batch_size,
                 epochs=1,
             )
-
             train_stats = evaluate_predictions(
                 gold_truths=train_labels,
                 predictions=self.predict(train_ligands, train_proteins),
                 metrics=list(train_stats_over_epochs.keys()),
             )
             for metric, stat in train_stats.items():
-                train_stats_over_epochs[metric].append(stat)
+                train_stats_over_epochs[metric].append(np.round(stat, 6))
 
-            if val_tuple is not None:
+            for split in val_splits.keys():
                 val_stats = evaluate_predictions(
-                    y_true=val_labels,
-                    y_preds=self.predict(val_ligands, val_proteins),
-                    metrics=list(val_stats_over_epochs.keys()),
+                    gold_truths=val_splits[split][2],
+                    predictions=self.predict(val_splits[split][0], val_splits[split][1]),
+                    metrics=list(val_stats_over_epochs[split].keys()),
                 )
                 for metric, stat in val_stats.items():
-                    val_stats_over_epochs[metric].append(stat)
+                    val_stats_over_epochs[split][metric].append(np.round(stat, 6))
+            
+            if self.early_stopping_num_epochs > 0:
+                current_metric = train_stats[self.early_stopping_metric] if self.early_stopping_split == "train" else val_stats_over_epochs[self.early_stopping_split][self.early_stopping_metric][-1]
+                if current_metric < best_metric:
+                    best_metric = current_metric
+                    best_metric_epoch = e
+                    if self.model_folder:
+                        self.model.save(self.model_folder + "model")
+                else:
+                    if (e > self.min_epochs) and ((e - best_metric_epoch) == self.early_stopping_num_epochs):
+                        print(f"Early stopping due to no increase to {self.early_stopping_metric} in {self.early_stopping_split} split for {self.early_stopping_num_epochs} epochs.")
+                        if self.model_folder:
+                            self.model = tf.keras.models.load_model(self.model_folder+"model")
+                            print(f"Retrieved the saved best model.")
+                        else:
+                            print("No save folder provided, using the final model.")
+                        break
+            
+            if (self.early_stopping_metric_threshold) and (e > self.min_epochs):
+                if self.early_stopping_split == "train":
+                    current_metric = train_stats[self.early_stopping_metric]
+                else:
+                    current_metric = val_stats_over_epochs[self.early_stopping_split][self.early_stopping_metric][-1]
+                if (current_metric < self.early_stopping_metric_threshold):
+                    print(f"Early stopping training due to convergence on the {self.early_stopping_split} split.")
+                    break
+
 
         self.history["train"] = train_stats_over_epochs
         if val_stats_over_epochs is not None:
-            self.history["val"] = val_stats_over_epochs
+            self.history["val_splits"] = val_stats_over_epochs
 
         return self.history
 
@@ -279,7 +306,7 @@ class TFPredictor(Predictor):
         protein_vectors = self.vectorize_proteins(proteins)
         return self.model.predict([ligand_vectors, protein_vectors]).tolist()
 
-    def save(self, path: str) -> None:
+    def save(self, path: str, save_history: bool = False, save_json: bool = False):
         """A utility function to save a `TFPredictor` instance to the disk.
         All attributes, including the model weights, are saved.
 
@@ -287,14 +314,19 @@ class TFPredictor(Predictor):
         ----------
         path : str
             Path to save the predictor.
-        """        
+        save_history : bool, optional
+            Determines whether to save training history as well.
+        save_json : bool, optional
+            Determines whether to save json representation of parameters as well.
+        """
         self.model.save(f"{path}/model")
 
-        with open(f"{path}/history.json", "w") as f:
-            json.dump(self.history, f, indent=4)
+        if save_history:
+            with open(f"{path}/history.json", "w") as f:
+                json.save(self.history, f, indent=4)
 
-        donot_copy = {"model", "history"}
-        dct = {k: v for k, v in self.__dict__.items() if k not in donot_copy}
-        with open(f"{path}/params.json", "w") as f:
-            json.dump(dct, f, indent=4)
-
+        if save_json:
+            donot_copy = {"model", "history"}
+            dct = {k: v for k, v in self.__dict__.items() if k not in donot_copy}
+            with open(f"{path}/params.json", "w") as f:
+                json.save(dct, f, indent=4)

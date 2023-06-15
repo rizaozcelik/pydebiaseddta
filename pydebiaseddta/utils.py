@@ -1,5 +1,7 @@
 from typing import Dict, List
 import json
+import numpy as np
+import pandas as pd
 from . import package_path
 
 
@@ -17,7 +19,7 @@ def load_sample_dta_data(mini: bool = False) -> Dict[str, List]:
     -------
     Dict[str, List]
         The dictionary has three keys: `"train"`, `"val"`, and `"test"`, each corresponding to different folds of the dataset.
-        Each key maps to a list with three elements: *list of chemicals*, *list of proteins*, and *list of affinity scores*. 
+        Each key maps to a list with three elements: *list of ligands*, *list of proteins*, and *list of affinity scores*. 
         The elements in the same index of the lists correspond to a drug-target affinity measurement.
     """
     sample_data_path = f"{package_path}/data/dta_sample_data/dta_sample_data.json"
@@ -73,3 +75,19 @@ def load_json(path: str) -> Dict:
     """
     with open(path, "r") as f:
         return json.load(f)
+
+
+def get_ranks(vec: np.ndarray) -> np.ndarray:
+    """Obtains percentile ranks for a vector of observations.
+
+    Parameters
+    ----------
+    vec : np.ndarray
+        An array of real valued observations.
+
+    Returns
+    -------
+    np.array
+        Percentile ranks of the elements of the vector.
+    """
+    return pd.Series(vec).rank(pct=True).values
