@@ -24,7 +24,7 @@ def load_sample_dta_data(mini: bool = False) -> Dict[str, List]:
         Each key maps to a list with three elements: *list of ligands*, *list of proteins*, and *list of affinity scores*. 
         The elements in the same index of the lists correspond to a drug-target affinity measurement.
     """
-    sample_data_path = f"{package_path}/data/dta_sample_data/dta_sample_data.json"
+    sample_data_path = f"{package_path}/data/dta/dta_sample_data.json"
     if mini:
         sample_data_path = f"{package_path}/data/dta/dta_sample_data.mini.json"
     with open(sample_data_path) as f:
@@ -95,7 +95,7 @@ def get_ranks(vec: np.ndarray) -> np.ndarray:
     return pd.Series(vec).rank(pct=True).values
 
 
-def create_ligands_proteins_df(df: pd.Dataframe, radius: int = 2, n_bits: int = 2048) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def create_ligands_proteins_df(df: pd.DataFrame, radius: int = 2, n_bits: int = 2048) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Creates a DataFrame given input ligands, adds Morgan fingerprints.
 
     Parameters
@@ -120,7 +120,7 @@ def create_ligands_proteins_df(df: pd.Dataframe, radius: int = 2, n_bits: int = 
         column `aa_sequence`.
     """
     ligands = {str(row.ligand_id): row.smiles for i, row in df.iterrows()}
-    proteins = {row.prot_id: row.aa_sequence for i, row in df.iterrows()}
+    proteins = {row.protein_id: row.aa_sequence for i, row in df.iterrows()}
 
     df_ligands = pd.DataFrame.from_dict(ligands, orient='index')
     df_ligands.columns = ['smiles']
@@ -130,7 +130,7 @@ def create_ligands_proteins_df(df: pd.Dataframe, radius: int = 2, n_bits: int = 
 
     df_proteins = pd.DataFrame.from_dict(proteins, orient='index')
     df_proteins.columns = ['aa_sequence']
-    df_proteins.index.name = 'prot_id'
+    df_proteins.index.name = 'protein_id'
     return df_ligands, df_proteins
 
 
@@ -173,7 +173,7 @@ def compute_protein_distances(df_proteins: pd.DataFrame, prot_sim_matrix_path: s
         A DataFrame that includes pairwise distances between proteins, where rows
         and columns are indexed by protein id.
     """
-    sw_matrix = pd.read_csv(prot_sim_matrix_path, index_col=0).loc[df_proteins.index, df_proteins.index]
+    sw_matrix = pd.read_csv(prot_sim_matrix_path, index_col=0).loc[df_proteins.index.array, df_proteins.index.array]
     sw_distances = 1 - sw_matrix
     return sw_distances
 
@@ -210,6 +210,7 @@ def compute_average_distance(
         A column the same length as the original dataset `df`, each row corresponding to the
         average distance of the protein in the original row from the rest of the dataset.
     """
+    df["ligand_id"] = df.ligand_id.astype(int).astype(str)
     df_ligands, df_proteins = create_ligands_proteins_df(df, radius, n_bits)
     dist_ligands = compute_ligand_distances(df_ligands)
     dist_prots = compute_protein_distances(df_proteins, prot_sim_matrix_path)
@@ -218,10 +219,10 @@ def compute_average_distance(
     df_ligand_distances = df_ligand_distances.reset_index().rename(columns={0: "avg_ligand_distance"})
     df = df.merge(df_ligand_distances, how="left", on="ligand_id")
 
-    dist_prots = dist_prots.loc[df.prot_id.value_counts().index, df.prot_id.value_counts().index]
-    df_prot_distances = (dist_prots * (df.prot_id.value_counts()/len(df))[dist_prots.index]).sum(1)
-    df_prot_distances = df_prot_distances.reset_index().rename(columns={'index': 'prot_id', 0: "avg_prot_distance"})
-    df = df.merge(df_prot_distances, how="left", on="prot_id")
+    dist_prots = dist_prots.loc[df.protein_id.value_counts().index, df.protein_id.value_counts().index]
+    df_prot_distances = (dist_prots * (df.protein_id.value_counts()/len(df))[dist_prots.index]).sum(1)
+    df_prot_distances = df_prot_distances.reset_index().rename(columns={'index': 'protein_id', 0: "avg_prot_distance"})
+    df = df.merge(df_prot_distances, how="left", on="protein_id")
     
     return df["avg_ligand_distance"], df["avg_prot_distance"]
 
@@ -246,7 +247,7 @@ def compute_inv_frequency(df: pd.DataFrame) -> Tuple[pd.Series, pd.Series]:
         inverse frequency of the row's protein in the dataset.
     """
     df = df.merge((1/df.ligand_id.value_counts()).reset_index().rename(columns={"index": "ligand_id", "ligand_id": "ligand_inv_frequency"}), how="left", on="ligand_id")
-    df = df.merge((1/df.prot_id.value_counts()).reset_index().rename(columns={"index": "prot_id", "prot_id": "prot_inv_frequency"}), how="left", on="prot_id")
+    df = df.merge((1/df.protein_id.value_counts()).reset_index().rename(columns={"index": "protein_id", "protein_id": "prot_inv_frequency"}), how="left", on="protein_id")
     return df["ligand_inv_frequency"], df["prot_inv_frequency"]
 
 
@@ -263,4 +264,4 @@ def robust_standardize(x: np.ndarray) -> np.ndarray:
     np.ndarray
         Standardized input vector.
     """
-    return (x - np.median(x)) / np.median(np.abs(x - np.median(x)))
+    return (x - np.median(x)) / np.mean(np.abs(x - np.median(x)))

@@ -13,7 +13,7 @@ from ..utils import get_ranks
 class DebiasedDTA:
     def __init__(
         self,
-        guide_cls: Union[Type[guides.Guide], Type[guides.Predictor]],
+        guide_cls: Union[Type[guides.Guide], Type[predictors.Predictor]],
         predictor_cls: Union[Type[guides.Guide], Type[predictors.Predictor]],
         mini_val_frac: float = 0.2,
         n_bootstrapping: int = 10,
@@ -31,11 +31,11 @@ class DebiasedDTA:
         
         Parameters
         ----------
-        guide_cls : Union[Type[guides.Guide], Type[guides.Predictor]]
+        guide_cls : Union[Type[guides.Guide], Type[predictors.Predictor]]
             The `Guide` class for debiasing. Note that the input is not an instance, but a class, *e.g.*, `BoWDTA`, not `BoWDTA()`.
             The instance is created during the model training by the DebiasedDTA module. Passing a `Predictor` class will
             result in utilization of the training errors of this predictor.
-        predictor_cls : Union[Type[guides.Guide], Type[guides.Predictor]]
+        predictor_cls : Union[Type[guides.Guide], Type[predictors.Predictor]]
             Class of the `Predictor` to debias. Note that the input is not an instance, but a class, *e.g.*, `BPEDTA`, not `BPEDTA()`.
             The instance is created during the model training by the DebiasedDTA module. Passing a `Guide` class will
             result in use of that guide class as the predictor to allow baseline computations, however this will result in
@@ -171,21 +171,26 @@ class DebiasedDTA:
         if weights_load_path:
             return pd.read_csv(weights_load_path, header=None).loc[:, 3].values
         elif self.guide_cls is None:
+            # if a guide is being used as predictor to compute a baseline
+            if issubclass(self.predictor_cls, guides.Guide):
+                self.predictor_instance.n_epochs = 1
             return [1 for i in range(len(train_ligands))]
         elif self.guide_cls.__name__ == "OutDTA":
             self.guide_instance = self.guide_cls(ligands=train_ligands, proteins=train_proteins, **self.guide_params)
-            importance_weights = self.guide_instance.compute_average_distances().values
+            self.guide_instance.train()
+            importance_weights = self.guide_instance.get_importance_weights()
         elif self.guide_cls.__name__ == "RFDTA":
             guide_instance = self.guide_cls(**self.guide_params)
             guide_instance.train(train_ligands, train_proteins, train_labels)
             train_preds = guide_instance.predict_oob()
             importance_weights = np.abs(np.array(train_labels) - np.array(train_preds)) ** self.guide_error_exponent
-        elif isinstance(self.guide_cls, predictors.Predictor):
+        elif issubclass(self.guide_cls, predictors.Predictor):
+            print(f"Using predictor {self.guide_cls.__name__} as guide.")
             self.guide_instance = self.guide_cls(**self.guide_params)
-            importance_weights = self.guide_instance.compute_average_distances().values
             self.guide_instance.train(train_ligands, train_proteins, train_labels)
-            preds = self.guide_instance.predict(train_ligands, train_proteins).numpy()
-            importance_weights = np.abs((train_labels.values - preds)) ** self.guide_error_exponent
+            preds = self.guide_instance.predict(train_ligands, train_proteins)
+            importance_weights = np.abs((np.array(train_labels) - np.array(preds).flatten())) ** self.guide_error_exponent
+            print("Guide training completed.")
         else:
             for _ in range(self.n_bootstrapping):
                 random.shuffle(train_interactions)

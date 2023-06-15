@@ -15,7 +15,7 @@ from ..sequence.smiles_processing import (
 VOCAB_SIZES_LIGAND = {"high": 8000, "low":94}
 VOCAB_SIZES_PROTEIN = {"high": 32000, "low":26}
 
-class BoWDTA(Guide):
+class RFDTA(Guide):
     def __init__(
             self,
             num_trees: int = 1000,
@@ -153,6 +153,7 @@ class BoWDTA(Guide):
         train_ligands: List[str],
         train_proteins: List[str],
         train_labels: List[float],
+        **kwargs
     ):
         """Trains a BoWDTA model on the provided protein-ligand interactions.
         The biomolecules are represented as bag of their biomolecule words and a
@@ -220,15 +221,3 @@ class BoWDTA(Guide):
 
         interaction = np.hstack([ligand_vectors, protein_vectors])
         return self.prediction_model.predict(interaction).tolist()
-
-
-if __name__ == "__main__":
-
-    from pydebiaseddta.utils import load_sample_dta_data
-
-    train_ligands, train_proteins, train_labels = load_sample_dta_data(
-        mini=True
-    )["train"]
-    bowdta = BoWDTA()
-    bowdta.train(train_ligands, train_proteins, train_labels)
-    preds = bowdta.predict(train_ligands, train_proteins)

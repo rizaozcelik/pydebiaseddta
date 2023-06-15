@@ -6,3 +6,5 @@ The implemented guides are IDDTA and BoWDTA, and an abstract classes is also ava
 from .abstract_guide import Guide
 from .bowdta import BoWDTA
 from .iddta import IDDTA
+from .outdta import OutDTA
+from .rfdta import RFDTA

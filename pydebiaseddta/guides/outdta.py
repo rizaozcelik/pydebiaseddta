@@ -61,7 +61,7 @@ class OutDTA(Guide):
             }[combination_method]
         self.prot_sim_matrix_path = prot_sim_matrix_path
 
-    def compute_importance_weight(self, df=None):
+    def train(self, df=None):
         """Compute rarity of each ligand and protein in the dataset.
 
         Parameters
@@ -71,11 +71,6 @@ class OutDTA(Guide):
             `protein_id`, SMILES strings under `smiles` and amino-acid sequence strings under
             `aa_sequence`.
 
-        Returns
-        -------
-        importance_weights : pd.Series
-            A pandas Series that includes the importance weights for each row of the input df.
-        
         Raises
         ------
         ValueError
@@ -92,4 +87,24 @@ class OutDTA(Guide):
             raise ValueError("The rarity indicator you have selected does not exist.")
         del self.df
         ald, apd = robust_standardize(average_ligand_distance.values), robust_standardize(average_prot_distance.values)
-        return self.combination_function(ald, apd)
+        self.importance_weights = self.combination_function(ald, apd)
+
+    def get_importance_weights(self):
+        """Retrieve the computed importance weights.
+
+        Returns
+        -------
+        importance_weights : pd.Series
+            A pandas Series that includes the importance weights for each row of the input df.
+        """
+        return self.importance_weights
+
+    def predict(self):
+        """Predict function for the class.
+
+        Raises
+        ------
+        Exception
+            This guide does not use predict function to provide importance weights.
+        """
+        raise Exception("This guide cannot be used to obtain predictions.")
