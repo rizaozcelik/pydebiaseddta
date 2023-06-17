@@ -33,10 +33,10 @@ class DeepDTA(TFPredictor):
         early_stopping_metric_threshold: float = -1e6,
         early_stopping_num_epochs: int = 0,
         early_stopping_split: str = "train",
-        model_folder: str = "",
         optimizer: str = "adam",
         min_epochs: int = 0,
         seed: int = 0,
+        **kwargs
     ):
         """Constructor to create a DeepDTA instance.
         DeepDTA segments SMILES strings of ligands and amino-acid sequences of proteins into characters,
@@ -78,9 +78,6 @@ class DeepDTA(TFPredictor):
         early_stopping_split:
             The split for conducting early stopping checks. Available options are "train"
             and the keys in the val_split dictionary.
-        model_folder : str, optional
-            Folder for saving the model. Empty by default and not saving any models, also used for retrieving the
-            best model if early_stopping_num_epochs > 0.
         optimizer : str, optional
             The optimizer used in training. Available options are "adam" and "sgd".
         min_epochs : int, optional
@@ -101,7 +98,6 @@ class DeepDTA(TFPredictor):
         self.early_stopping_num_epochs = early_stopping_num_epochs
         self.early_stopping_split = early_stopping_split
         self.min_epochs = min_epochs
-        self.model_folder = model_folder
 
         self.chem_vocab_size = 94
         self.prot_vocab_size = 26
@@ -221,7 +217,7 @@ class DeepDTA(TFPredictor):
         """     
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(ligands, smi_to_unichar_encoding)
-        word_identifier = load_ligand_word_identifier(vocab_size=94)
+        word_identifier = load_ligand_word_identifier(vocabulary_size=94)
 
         return np.array(
             word_identifier.encode_sequences(unichars, self.max_smi_len)
@@ -241,7 +237,7 @@ class DeepDTA(TFPredictor):
         np.array
             An $N \\times max\\_prot\\_len$ ($N$ is the number of the input proteins) matrix that contains label encoded sequences of amino-acids.
         """
-        word_identifier = load_protein_word_identifier(vocab_size=26)
+        word_identifier = load_protein_word_identifier(vocabulary_size=26)
         return np.array(
             word_identifier.encode_sequences(aa_sequences, self.max_prot_len)
         )
@@ -251,8 +247,7 @@ if __name__ == "__main__":
 
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_ligands, train_proteins, train_labels = load_sample_dta_data(
-        mini=True
-    )["train"]
+    train_data = load_sample_dta_data(mini=True)["train"]
+    train_ligands, train_proteins, train_labels = train_data["smiles"], train_data["aa_sequence"], train_data["affinity_score"]
     deepdta = DeepDTA(n_epochs=5)
     deepdta.train(train_ligands, train_proteins, train_labels)

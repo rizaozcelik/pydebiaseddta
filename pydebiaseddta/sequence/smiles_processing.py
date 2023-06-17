@@ -67,14 +67,14 @@ def segment_smiles_batch(
 def learn_unichar_encoding(smiles_corpus: List[str]) -> Dict:
     unichar_start_ix, unichar_end_ix = 33, 126
     target_vocab = {chr(ix) for ix in range(unichar_start_ix, unichar_end_ix + 1)}
-    vocab_size = len(target_vocab)
+    vocabulary_size = len(target_vocab)
     segmented_corpus = segment_smiles_batch(smiles_corpus)
 
     token_counts_by_smi = [Counter(example) for example in segmented_corpus]
     token_counts = sum(token_counts_by_smi, Counter())
 
-    if len(token_counts) > vocab_size:
-        source_vocab = [token for token, count in token_counts.most_common(vocab_size)]
+    if len(token_counts) > vocabulary_size:
+        source_vocab = [token for token, count in token_counts.most_common(vocabulary_size)]
     else:
         source_vocab = list(token_counts.keys())
     source_to_target_mapping = {

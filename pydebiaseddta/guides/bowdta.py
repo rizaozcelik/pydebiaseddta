@@ -22,7 +22,7 @@ class BoWDTA(Guide):
             min_samples_split: int = 2,
             min_samples_leaf: int = 1,
             criterion: str = "squared_error",
-            vocab_size: str = "high",
+            vocabulary_size: str = "high",
             ligand_vector_mode: str = "freq",
             prot_vector_mode: str = "freq",
             input_rank=0,
@@ -44,7 +44,7 @@ class BoWDTA(Guide):
             tree regressor.
         criterion : str, optional
             Criterion according to which the decision tree regressor will be trained.
-        vocab_size : str, optional
+        vocabulary_size : str, optional
             Vocabulary size that will be used for tokenizing ligands and proteins.
         ligand_vector_mode : str, optional
             Method to use when creating the matrix representation for ligand tokens.
@@ -64,18 +64,18 @@ class BoWDTA(Guide):
             max_depth=max_depth, min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf, criterion=criterion
             )
         self.input_rank = input_rank
-        self.vocab_size = vocab_size
+        self.vocabulary_size = vocabulary_size
         self.ligand_vector_mode = ligand_vector_mode
         self.prot_vector_mode = prot_vector_mode
     
-    def tokenize_ligands(self, smiles: List[str], vocab_size: str = "high") -> List[List[int]]:
+    def tokenize_ligands(self, smiles: List[str], vocabulary_size: str = "high") -> List[List[int]]:
         """Segments SMILES strings of the ligands into their ligand words and applies label encoding.
 
         Parameters
         ----------
         smiles : List[str]
             The SMILES strings of the ligands
-        vocab_size : str, optional
+        vocabulary_size : str, optional
             Vocabulary size that will be used for tokenizing ligands.
 
         Returns
@@ -85,18 +85,18 @@ class BoWDTA(Guide):
         """
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(smiles, smi_to_unichar_encoding)
-        word_identifier = load_ligand_word_identifier(vocab_size=VOCAB_SIZES_LIGAND[vocab_size])
+        word_identifier = load_ligand_word_identifier(vocabulary_size=VOCAB_SIZES_LIGAND[vocabulary_size])
 
         return word_identifier.encode_sequences(unichars, 100)
 
-    def tokenize_proteins(self, aa_sequences: List[str], vocab_size: str = "high"):
+    def tokenize_proteins(self, aa_sequences: List[str], vocabulary_size: str = "high"):
         """Segments amino-acid sequences of the proteins into their protein words and applies label encoding.
 
         Parameters
         ----------
         aa_sequences : List[str]
             The amino-acid sequences of the proteins.
-        vocab_size : str, optional
+        vocabulary_size : str, optional
             Vocabulary size that will be used for tokenizing proteins.
 
         Returns
@@ -104,7 +104,7 @@ class BoWDTA(Guide):
         List[List[int]]
             Label encoded sequences of protein words.
         """
-        word_identifier = load_protein_word_identifier(vocab_size=VOCAB_SIZES_PROTEIN[vocab_size])
+        word_identifier = load_protein_word_identifier(vocabulary_size=VOCAB_SIZES_PROTEIN[vocabulary_size])
         return word_identifier.encode_sequences(aa_sequences, 1000)
 
     def vectorize_ligands(self, smiles_words: List[List[int]]) -> np.array:
@@ -161,8 +161,8 @@ class BoWDTA(Guide):
         train_labels : List[float]
             Affinity scores of the training interactions.
         """    
-        tokenized_ligands = self.tokenize_ligands(train_ligands, self.vocab_size)
-        tokenized_proteins = self.tokenize_proteins(train_proteins, self.vocab_size)
+        tokenized_ligands = self.tokenize_ligands(train_ligands, self.vocabulary_size)
+        tokenized_proteins = self.tokenize_proteins(train_proteins, self.vocabulary_size)
         self.ligand_bow_vectorizer.fit_on_texts(tokenized_ligands)
         self.protein_bow_vectorizer.fit_on_texts(tokenized_proteins)
 
@@ -196,8 +196,8 @@ class BoWDTA(Guide):
         List[float]
             Predicted affinities.
         """    
-        tokenized_ligands = self.tokenize_ligands(ligands, self.vocab_size)
-        tokenized_proteins = self.tokenize_proteins(proteins, self.vocab_size)
+        tokenized_ligands = self.tokenize_ligands(ligands, self.vocabulary_size)
+        tokenized_proteins = self.tokenize_proteins(proteins, self.vocabulary_size)
 
         ligand_vectors = self.vectorize_ligands(tokenized_ligands)
         protein_vectors = self.vectorize_proteins(tokenized_proteins)
@@ -210,9 +210,8 @@ if __name__ == "__main__":
 
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_ligands, train_proteins, train_labels = load_sample_dta_data(
-        mini=True
-    )["train"]
+    train_data = load_sample_dta_data(mini=True)["train"]
+    train_ligands, train_proteins, train_labels = train_data["smiles"], train_data["aa_sequence"], train_data["affinity_score"]
     bowdta = BoWDTA()
     bowdta.train(train_ligands, train_proteins, train_labels)
     preds = bowdta.predict(train_ligands, train_proteins)
