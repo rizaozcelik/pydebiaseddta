@@ -23,7 +23,7 @@ class RFDTA(Guide):
             min_samples_split: int = 2,
             min_samples_leaf: int = 1,
             criterion: str = "squared_error",
-            vocabulary_size: str = "high",
+            vocab_size: str = "high",
             ligand_vector_mode: str = "freq",
             prot_vector_mode: str = "freq",
             input_rank=0,
@@ -48,7 +48,7 @@ class RFDTA(Guide):
             tree regressor.
         criterion : str, optional
             Criterion according to which the decision tree regressor will be trained.
-        vocabulary_size : str, optional
+        vocab_size : str, optional
             Vocabulary size that will be used for tokenizing ligands and proteins.
         ligand_vector_mode : str, optional
             Method to use when creating the matrix representation for ligand tokens.
@@ -71,18 +71,18 @@ class RFDTA(Guide):
             min_samples_leaf=min_samples_leaf, criterion=criterion, oob_score=True, n_jobs=n_jobs
         )
         self.input_rank = input_rank
-        self.vocabulary_size = vocabulary_size
+        self.vocab_size = vocab_size
         self.ligand_vector_mode = ligand_vector_mode
         self.prot_vector_mode = prot_vector_mode
     
-    def tokenize_ligands(self, smiles: List[str], vocabulary_size: str = "high") -> List[List[int]]:
+    def tokenize_ligands(self, smiles: List[str], vocab_size: str = "high") -> List[List[int]]:
         """Segments SMILES strings of the ligands into their ligand words and applies label encoding.
 
         Parameters
         ----------
         smiles : List[str]
             The SMILES strings of the ligands
-        vocabulary_size : str, optional
+        vocab_size : str, optional
             Vocabulary size that will be used for tokenizing ligands.
 
         Returns
@@ -92,18 +92,18 @@ class RFDTA(Guide):
         """
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(smiles, smi_to_unichar_encoding)
-        word_identifier = load_ligand_word_identifier(vocabulary_size=VOCAB_SIZES_LIGAND[vocabulary_size])
+        word_identifier = load_ligand_word_identifier(vocab_size=VOCAB_SIZES_LIGAND[vocab_size])
 
         return word_identifier.encode_sequences(unichars, 100)
 
-    def tokenize_proteins(self, aa_sequences: List[str], vocabulary_size: str = "high"):
+    def tokenize_proteins(self, aa_sequences: List[str], vocab_size: str = "high"):
         """Segments amino-acid sequences of the proteins into their protein words and applies label encoding.
 
         Parameters
         ----------
         aa_sequences : List[str]
             The amino-acid sequences of the proteins.
-        vocabulary_size : str, optional
+        vocab_size : str, optional
             Vocabulary size that will be used for tokenizing proteins.
 
         Returns
@@ -111,7 +111,7 @@ class RFDTA(Guide):
         List[List[int]]
             Label encoded sequences of protein words.
         """
-        word_identifier = load_protein_word_identifier(vocabulary_size=VOCAB_SIZES_PROTEIN[vocabulary_size])
+        word_identifier = load_protein_word_identifier(vocab_size=VOCAB_SIZES_PROTEIN[vocab_size])
         return word_identifier.encode_sequences(aa_sequences, 1000)
 
     def vectorize_ligands(self, smiles_words: List[List[int]]) -> np.array:
@@ -168,8 +168,8 @@ class RFDTA(Guide):
         train_labels : List[float]
             Affinity scores of the training interactions.
         """    
-        tokenized_ligands = self.tokenize_ligands(train_ligands, self.vocabulary_size)
-        tokenized_proteins = self.tokenize_proteins(train_proteins, self.vocabulary_size)
+        tokenized_ligands = self.tokenize_ligands(train_ligands, self.vocab_size)
+        tokenized_proteins = self.tokenize_proteins(train_proteins, self.vocab_size)
         self.ligand_bow_vectorizer.fit_on_texts(tokenized_ligands)
         self.protein_bow_vectorizer.fit_on_texts(tokenized_proteins)
 
@@ -213,8 +213,8 @@ class RFDTA(Guide):
         List[float]
             Predicted affinities.
         """    
-        tokenized_ligands = self.tokenize_ligands(ligands, self.vocabulary_size)
-        tokenized_proteins = self.tokenize_proteins(proteins, self.vocabulary_size)
+        tokenized_ligands = self.tokenize_ligands(ligands, self.vocab_size)
+        tokenized_proteins = self.tokenize_proteins(proteins, self.vocab_size)
 
         ligand_vectors = self.vectorize_ligands(tokenized_ligands)
         protein_vectors = self.vectorize_proteins(tokenized_proteins)

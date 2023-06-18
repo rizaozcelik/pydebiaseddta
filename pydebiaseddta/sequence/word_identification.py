@@ -16,15 +16,15 @@ class WordIdentifier:
     `WordIdentifier` leverages the Byte Pair Encoding algorithm implemented in the `tokenizers` library
     to learn biomolecule vocabularies and segment biomolecule strings into their words. 
     """    
-    def __init__(self, vocabulary_size: int):
+    def __init__(self, vocab_size: int):
         """Creates a `WordIdentifier` instance.
 
         Parameters
         ----------
-        vocabulary_size : int
+        vocab_size : int
             Size of the biomolecule vocabulary.
         """        
-        self.vocabulary_size = vocabulary_size
+        self.vocab_size = vocab_size
         self.tokenizer = Tokenizer(BPE())
         self.tokenizer.pre_tokenizer = Whitespace()
 
@@ -46,8 +46,8 @@ class WordIdentifier:
             loadpath = loadpath + FILE_EXTENSION
 
         dct = load_json(loadpath)
-        vocabulary_size = len(dct["model"]["vocab"])
-        instance = cls(vocabulary_size)
+        vocab_size = len(dct["model"]["vocab"])
+        instance = cls(vocab_size)
         instance.tokenizer = Tokenizer.from_str(json.dumps(dct))
         return instance
 
@@ -60,12 +60,12 @@ class WordIdentifier:
             Path to the corpus of biomolecule strings. The corpus file must contain a biomolecule string per line.
         """        
         trainer = BpeTrainer(
-            vocabulary_size=self.vocabulary_size, special_tokens=["[PAD]"]
+            vocab_size=self.vocab_size, special_tokens=["[PAD]"]
         )
         self.tokenizer.train([corpus_path], trainer)
-        if self.tokenizer.get_vocab_size() < self.vocabulary_size:
+        if self.tokenizer.get_vocab_size() < self.vocab_size:
             print(
-                f"Warning: The iterations stopped before the desired vocab size is reached. Learned vocab size={self.tokenizer.get_vocab_size()}. Desired size={self.vocabulary_size}"
+                f"Warning: The iterations stopped before the desired vocab size is reached. Learned vocab size={self.tokenizer.get_vocab_size()}. Desired size={self.vocab_size}"
             )
 
     def tokenize_sequences(self, sequences: List[str]) -> List[List[str]]:
@@ -124,13 +124,13 @@ class WordIdentifier:
         save_json(json.loads(self.tokenizer.to_str()), savepath)
 
 
-def load_ligand_word_identifier(vocabulary_size: int) -> WordIdentifier:
+def load_ligand_word_identifier(vocab_size: int) -> WordIdentifier:
     """A convenience function to load word vocabularies learned for SMILES strings in the study.
     The possible vocabularies to load are for DeepDTA and BPE-DTA. 
 
     Parameters
     ----------
-    vocabulary_size : int
+    vocab_size : int
         Size of the learned SMILES word vocabulary. The allowed values are 94 and 8000, for DeepDTA and BPE-DTA, respectively.
 
     Returns
@@ -143,24 +143,24 @@ def load_ligand_word_identifier(vocabulary_size: int) -> WordIdentifier:
     ValueError
         If vocabulary size besides 94 and 8000 is passed, a `ValueError` is raised.
     """    
-    if vocabulary_size not in [94, 8000]:
+    if vocab_size not in [94, 8000]:
         raise ValueError("Supported vocab sizes are 94 and 8000")
 
     ligand_vocab_path = f"{package_path}/data/word_identification/ligand"
     vocab_path = f"{ligand_vocab_path}/chembl27_enc_94.json"
-    if vocabulary_size == 8000:
+    if vocab_size == 8000:
         vocab_path = f"{ligand_vocab_path}/chembl27_enc_bpe_8000.json"
 
     return WordIdentifier.from_file(vocab_path)
 
 
-def load_protein_word_identifier(vocabulary_size: int)-> WordIdentifier:
+def load_protein_word_identifier(vocab_size: int)-> WordIdentifier:
     """A convenience function to load word vocabularies learned for amino-acid sequences in the study.
     The possible vocabularies to load are for DeepDTA and BPE-DTA. 
 
     Parameters
     ----------
-    vocabulary_size : int
+    vocab_size : int
         Size of the learned SMILES word vocabulary. The allowed values are 26 and 32000, for DeepDTA and BPE-DTA, respectively.
 
     Returns
@@ -173,19 +173,19 @@ def load_protein_word_identifier(vocabulary_size: int)-> WordIdentifier:
     ValueError
         If vocabulary size besides 26 and 32000 is passed, a `ValueError` is raised.
     """    
-    if vocabulary_size not in [26, 32000]:
+    if vocab_size not in [26, 32000]:
         raise ValueError("Supported vocab sizes are 26 and 32000")
 
     protein_vocab_path = f"{package_path}/data/word_identification/protein"
     vocab_path = f"{protein_vocab_path}/uniprot_26.json"
-    if vocabulary_size == 32000:
+    if vocab_size == 32000:
         vocab_path = f"{protein_vocab_path}/uniprot_bpe_32000.json"
 
     return WordIdentifier.from_file(vocab_path)
 
 
 if __name__ == "__main__":
-    word_identifier = WordIdentifier(vocabulary_size=1024)
+    word_identifier = WordIdentifier(vocab_size=1024)
     word_identifier.train(f"{package_path}/data/sequence/chembl27.mini.smiles")
 
     with open(f"{package_path}/data/sequence/chembl27.mini.smiles") as f:
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     is_save_load_ok = (
         word_identifier.tokenizer.to_str()
         == loaded_identifier.tokenizer.to_str()
-        and word_identifier.vocabulary_size == loaded_identifier.vocabulary_size
+        and word_identifier.vocab_size == loaded_identifier.vocab_size
     )
     if not is_save_load_ok:
         raise ValueError("Saved and laoded objects are not the same")

@@ -216,7 +216,7 @@ class BPEDTA(TFPredictor):
         """        
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(ligands, smi_to_unichar_encoding)
-        word_identifier = load_ligand_word_identifier(vocabulary_size=8000)
+        word_identifier = load_ligand_word_identifier(vocab_size=8000)
 
         return np.array(word_identifier.encode_sequences(unichars, self.max_smi_len))
 
@@ -234,7 +234,7 @@ class BPEDTA(TFPredictor):
         np.array
             An $N \\times max\\_prot\\_len$ ($N$ is the number of the input proteins) matrix that contains label encoded sequences of protein words.
         """      
-        word_identifier = load_protein_word_identifier(vocabulary_size=32000)
+        word_identifier = load_protein_word_identifier(vocab_size=32000)
         return np.array(
             word_identifier.encode_sequences(aa_sequences, self.max_prot_len)
         )
@@ -243,7 +243,6 @@ class BPEDTA(TFPredictor):
 if __name__ == "__main__":
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_data = load_sample_dta_data(mini=True)["train"]
-    train_ligands, train_proteins, train_labels = train_data["smiles"], train_data["aa_sequence"], train_data["affinity_score"]
+    train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
     bpedta = BPEDTA(n_epochs=5)
     bpedta.train(train_ligands, train_proteins, train_labels)

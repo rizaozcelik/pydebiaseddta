@@ -217,7 +217,7 @@ class DeepDTA(TFPredictor):
         """     
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(ligands, smi_to_unichar_encoding)
-        word_identifier = load_ligand_word_identifier(vocabulary_size=94)
+        word_identifier = load_ligand_word_identifier(vocab_size=94)
 
         return np.array(
             word_identifier.encode_sequences(unichars, self.max_smi_len)
@@ -237,7 +237,7 @@ class DeepDTA(TFPredictor):
         np.array
             An $N \\times max\\_prot\\_len$ ($N$ is the number of the input proteins) matrix that contains label encoded sequences of amino-acids.
         """
-        word_identifier = load_protein_word_identifier(vocabulary_size=26)
+        word_identifier = load_protein_word_identifier(vocab_size=26)
         return np.array(
             word_identifier.encode_sequences(aa_sequences, self.max_prot_len)
         )
@@ -247,7 +247,6 @@ if __name__ == "__main__":
 
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_data = load_sample_dta_data(mini=True)["train"]
-    train_ligands, train_proteins, train_labels = train_data["smiles"], train_data["aa_sequence"], train_data["affinity_score"]
+    train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
     deepdta = DeepDTA(n_epochs=5)
     deepdta.train(train_ligands, train_proteins, train_labels)
