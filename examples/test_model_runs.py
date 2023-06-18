@@ -6,7 +6,7 @@ from pydebiaseddta.utils import load_sample_dta_data
 from pydebiaseddta.evaluation import evaluate_predictions
 
 # %%
-train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True)["train"]
+train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
 # %%
 bpedta = BPEDTA(n_epochs=2)
 bpedta.train(train_ligands, train_proteins, train_labels)

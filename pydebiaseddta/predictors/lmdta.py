@@ -24,10 +24,10 @@ class LMDTA(TFPredictor):
             early_stopping_metric_threshold: float = -1e6,
             early_stopping_num_epochs: int = 0,
             early_stopping_split: str = "train",
-            model_folder: str = "",
             optimizer: str = "adam",
             min_epochs: int = 0,
             seed: int = 0,
+            **kwargs
             ):
         """Constructor to create a LMDTA instance.
         LMDTA represents ligands and proteins with pre-trained language model embeddings
@@ -55,9 +55,6 @@ class LMDTA(TFPredictor):
         early_stopping_split:
             The split for conducting early stopping checks. Available options are "train"
             and the keys in the val_split dictionary.
-        model_folder : str, optional
-            Folder for saving the model. Empty by default and not saving any models, also used for retrieving the
-            best model if early_stopping_num_epochs > 0.
         optimizer : str, optional
             The optimizer used in training. Available options are "adam" and "sgd".
         min_epochs : int, optional
@@ -71,7 +68,6 @@ class LMDTA(TFPredictor):
         self.early_stopping_num_epochs = early_stopping_num_epochs
         self.early_stopping_split = early_stopping_split
         self.min_epochs = min_epochs
-        self.model_folder = model_folder
 
         transformers.logging.set_verbosity(transformers.logging.CRITICAL)
         self.ligand_tokenizer = AutoTokenizer.from_pretrained(
