@@ -210,9 +210,7 @@ if __name__ == "__main__":
 
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_ligands, train_proteins, train_labels = load_sample_dta_data(
-        mini=True
-    )["train"]
+    train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
     bowdta = BoWDTA()
     bowdta.train(train_ligands, train_proteins, train_labels)
     preds = bowdta.predict(train_ligands, train_proteins)
