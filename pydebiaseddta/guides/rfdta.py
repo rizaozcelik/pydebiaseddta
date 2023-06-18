@@ -1,6 +1,6 @@
 from typing import List
 import numpy as np
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 from tensorflow.keras.preprocessing.text import Tokenizer
 
 from .abstract_guide import Guide
@@ -15,9 +15,10 @@ from ..sequence.smiles_processing import (
 VOCAB_SIZES_LIGAND = {"high": 8000, "low":94}
 VOCAB_SIZES_PROTEIN = {"high": 32000, "low":26}
 
-class BoWDTA(Guide):
+class RFDTA(Guide):
     def __init__(
             self,
+            num_trees: int = 1000,
             max_depth: int = None,
             min_samples_split: int = 2,
             min_samples_leaf: int = 1,
@@ -26,14 +27,17 @@ class BoWDTA(Guide):
             ligand_vector_mode: str = "freq",
             prot_vector_mode: str = "freq",
             input_rank=0,
+            n_jobs=2,
             **kwargs):
-        """Constructor to create a BoWDTA model.
-        BoWDTA represents the proteins and ligands as "bag-of-words`
-        and uses a decision tree for prediction. BoWDTA uses the same biomolecule vocabulary
-        as BPEDTA.
+        """Constructor to create a RFDTA model.
+        RFDTA is a variant of BoWDTA that uses a random forest regressor and out-of-bag
+        predictions to compute the guide prediction errors. See BoWDTA documentation for
+        more details.
 
         Parameters
         ----------
+        num_trees: int, optional
+            Number of trees the random forest regressor will use.
         max_depth : int, optional
             Determines the maximum depth of the decision tree regressor.
         min_samples_split : int, optional
@@ -53,6 +57,8 @@ class BoWDTA(Guide):
         input_rank : int, optional
             If set > 0, uses a low-rank approximation of the input representation with
             the given rank.
+        n_jobs : int, optional
+            Number of processors to use in parallelizing the computation.
         """        
         self.ligand_bow_vectorizer = Tokenizer(
             filters=None, lower=False, oov_token="C"
@@ -60,9 +66,10 @@ class BoWDTA(Guide):
         self.protein_bow_vectorizer = Tokenizer(
             filters=None, lower=False, oov_token="$"
         )
-        self.prediction_model = DecisionTreeRegressor(
-            max_depth=max_depth, min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf, criterion=criterion
-            )
+        self.prediction_model = RandomForestRegressor(
+            n_estimators=num_trees, max_depth=max_depth, min_samples_split=min_samples_split,
+            min_samples_leaf=min_samples_leaf, criterion=criterion, oob_score=True, n_jobs=n_jobs
+        )
         self.input_rank = input_rank
         self.vocab_size = vocab_size
         self.ligand_vector_mode = ligand_vector_mode
@@ -179,6 +186,16 @@ class BoWDTA(Guide):
         X_train = np.hstack([ligand_vectors, protein_vectors])
         self.prediction_model.fit(X_train, train_labels)
 
+    def predict_oob(self) -> List[float]:
+        """Get out of bag predictions for the training data.
+
+        Returns
+        -------
+        List[float]
+            List of OOB predictions for the training data input.
+        """
+        return self.prediction_model.oob_prediction_.tolist()
+
     def predict(
         self, ligands: List[str], proteins: List[str]
     ) -> List[float]:
@@ -204,13 +221,3 @@ class BoWDTA(Guide):
 
         interaction = np.hstack([ligand_vectors, protein_vectors])
         return self.prediction_model.predict(interaction).tolist()
-
-
-if __name__ == "__main__":
-
-    from pydebiaseddta.utils import load_sample_dta_data
-
-    train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
-    bowdta = BoWDTA()
-    bowdta.train(train_ligands, train_proteins, train_labels)
-    preds = bowdta.predict(train_ligands, train_proteins)

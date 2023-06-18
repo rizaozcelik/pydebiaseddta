@@ -1,7 +1,10 @@
+from __future__ import annotations
 from typing import Any, Dict, List, Union
 from pathlib import Path
 import json
 from abc import ABC, abstractmethod
+import shutil
+from tqdm import tqdm
 
 import numpy as np
 import tensorflow as tf
@@ -28,9 +31,6 @@ def create_uniform_weights(n_samples: int, n_epochs: int) -> List[np.array]:
         Sample weights across epochs. Each instance has a weight of 1 for all epochs.
     """
     return [np.array([1] * n_samples) for _ in range(n_epochs)]
-
-
-tf.get_logger().setLevel("WARNING")
 
 
 class Predictor(ABC):
@@ -141,29 +141,52 @@ class TFPredictor(Predictor):
         pass
 
     @classmethod
-    def from_file(cls, path: str):
+    def from_file(cls, path: str, params: Dict[str, Any] = None) -> TFPredictor:
         """A utility function to load a `TFPredictor` instance from disk.
-        All attributes, including the model weights, are loaded.
+
+        All attributes, including the model weights, are loaded. If a non-empty params
+        dictionary is provided, previously used hyperparameters are ignored and new ones
+        are instead used. This is done so that pretrained models can be used with new
+        hyperparameters for any other purposes. To prevent incompatibilities due to previous
+        tracked metrics and the new ones, the loaded history (if exists) is saved into
+        a different property called `pretraining_history`.
 
         Parameters
         ----------
         path : str
             Path to load the prediction model from.
+        params : Dict[str, Any]
+            Dictionary of hyperparameters to be used. 
 
         Returns
         -------
         TFPredictor
             The previously saved model.
         """
-        with open(f"{path}/params.json") as f:
-            dct = json.load(f)
+        if params:
+            print("New hyperparameters used for the pretrained predictor, any saved hyperparamaters are ignored.")
+            dct = params
+        else:
+            try:
+                with open(f"{path}/params.json") as f:
+                    dct = json.load(f)
+            except FileNotFoundError:
+                print("Saved hyperparameters file not found, initializing pretrained predictor with default hyperparameters.")
+                dct = {}
 
         instance = cls(**dct)
 
-        instance.model = tf.keras.models.load_model(f"{path}/model")
+        try:
+            with open(f"{path}/history.json") as f:
+                instance.pretraining_history = json.load(f)
+        except FileNotFoundError:
+            print("Predictor pretraining history file not found, `pretraining_history` history is set to None.")
+            instance.pretraining_history = None
 
-        with open(f"{path}/history.json") as f:
-            instance.history = json.load(f)
+        try:
+            instance.model = tf.keras.models.load_model(f"{path}/model")        
+        except FileNotFoundError:
+            raise FileNotFoundError("Model not found. You cannot initialize a Predictor from file with no saved models.")
         return instance
 
     def train(
@@ -173,7 +196,8 @@ class TFPredictor(Predictor):
         train_labels: List[float],
         val_splits: Dict[str, List[Union[List[str], List[float]]]] = {},
         sample_weights_by_epoch: List[np.array] = None,
-        metrics_tracked: List[str] = ["mse", "mae"],
+        metrics_tracked: List[str] = None,
+        predictor_save_folder: str = None,
         seed: int = 0,
     ) -> Dict:
         """The common model training procedure for BPE-DTA, LM-DTA, and DeepDTA.
@@ -202,6 +226,9 @@ class TFPredictor(Predictor):
         metrics_tracked : List[str], optional
             List of metrics that are tracked during training. Available options are
             "mse", "rmse", "mae", "r2", "ci".
+        predictor_save_folder : str, optional
+            If provided, this folder is used to save the trained predictor at the end of training.
+            It is also used to cache and load the incumbent best performing model if early stopping is used.
         seed : int, optional
             Seed for the training procedure.
 
@@ -211,8 +238,12 @@ class TFPredictor(Predictor):
             Training history.
         """
         tf.random.set_seed(seed)
-        if self.model_folder:
-            Path(self.model_folder).mkdir(parents=True, exist_ok=True)
+
+        if not metrics_tracked:
+            metrics_tracked = ["mse", "mae"]
+
+        if predictor_save_folder:
+            Path(predictor_save_folder).mkdir(parents=True, exist_ok=True)
 
         if sample_weights_by_epoch is None:
             sample_weights_by_epoch = create_uniform_weights(
@@ -228,13 +259,14 @@ class TFPredictor(Predictor):
         assert self.early_stopping_metric in ["mse", "mae"]
         best_metric = 1e6
         best_metric_epoch = 0
-        for e in range(self.n_epochs):
+        for e in tqdm(range(self.n_epochs)):
             self.model.fit(
                 x=[train_ligand_vectors, train_protein_vectors],
                 y=train_labels,
                 sample_weight=sample_weights_by_epoch[e],
                 batch_size=self.batch_size,
                 epochs=1,
+                verbose=0
             )
             train_stats = evaluate_predictions(
                 gold_truths=train_labels,
@@ -258,16 +290,17 @@ class TFPredictor(Predictor):
                 if current_metric < best_metric:
                     best_metric = current_metric
                     best_metric_epoch = e
-                    if self.model_folder:
-                        self.model.save(self.model_folder + "model")
+                    if predictor_save_folder:
+                        self.model.save(predictor_save_folder + "/temp_best_model")
                 else:
                     if (e > self.min_epochs) and ((e - best_metric_epoch) == self.early_stopping_num_epochs):
-                        print(f"Early stopping due to no increase to {self.early_stopping_metric} in {self.early_stopping_split} split for {self.early_stopping_num_epochs} epochs.")
-                        if self.model_folder:
-                            self.model = tf.keras.models.load_model(self.model_folder+"model")
-                            print(f"Retrieved the saved best model.")
+                        tqdm.write(f"Early stopping due to no increase to {self.early_stopping_metric} in {self.early_stopping_split} split for {self.early_stopping_num_epochs} epochs.")
+                        if predictor_save_folder:
+                            self.model = tf.keras.models.load_model(predictor_save_folder + "/temp_best_model")
+                            tqdm.write(f"Retrieved the best model from epoch {best_metric_epoch}.")
+                            shutil.rmtree(predictor_save_folder + "/temp_best_model")
                         else:
-                            print("No save folder provided, using the final model.")
+                            tqdm.write("No save folder provided, using the final model.")
                         break
             
             if (self.early_stopping_metric_threshold) and (e > self.min_epochs):
@@ -276,7 +309,7 @@ class TFPredictor(Predictor):
                 else:
                     current_metric = val_stats_over_epochs[self.early_stopping_split][self.early_stopping_metric][-1]
                 if (current_metric < self.early_stopping_metric_threshold):
-                    print(f"Early stopping training due to convergence on the {self.early_stopping_split} split.")
+                    tqdm.write(f"Early stopping training due to convergence on the {self.early_stopping_split} split.")
                     break
 
 
@@ -284,6 +317,9 @@ class TFPredictor(Predictor):
         if val_stats_over_epochs is not None:
             self.history["val_splits"] = val_stats_over_epochs
 
+        if predictor_save_folder:
+            self.save(predictor_save_folder)
+            print(f"Saved predictor to the folder {predictor_save_folder}.")
         return self.history
 
     def predict(self, ligands: List[str], proteins: List[str]) -> List[float]:
@@ -306,7 +342,7 @@ class TFPredictor(Predictor):
         protein_vectors = self.vectorize_proteins(proteins)
         return self.model.predict([ligand_vectors, protein_vectors]).tolist()
 
-    def save(self, path: str, save_history: bool = False, save_json: bool = False):
+    def save(self, path: str):
         """A utility function to save a `TFPredictor` instance to the disk.
         All attributes, including the model weights, are saved.
 
@@ -314,19 +350,13 @@ class TFPredictor(Predictor):
         ----------
         path : str
             Path to save the predictor.
-        save_history : bool, optional
-            Determines whether to save training history as well.
-        save_json : bool, optional
-            Determines whether to save json representation of parameters as well.
         """
         self.model.save(f"{path}/model")
 
-        if save_history:
-            with open(f"{path}/history.json", "w") as f:
-                json.save(self.history, f, indent=4)
+        with open(f"{path}/history.json", "w") as f:
+            json.dump(self.history, f, indent=4)
 
-        if save_json:
-            donot_copy = {"model", "history"}
-            dct = {k: v for k, v in self.__dict__.items() if k not in donot_copy}
-            with open(f"{path}/params.json", "w") as f:
-                json.save(dct, f, indent=4)
+        donot_copy = {"model", "history"}
+        dct = {k: v for k, v in self.__dict__.items() if k not in donot_copy}
+        with open(f"{path}/params.json", "w") as f:
+            json.dump(dct, f, indent=4)
