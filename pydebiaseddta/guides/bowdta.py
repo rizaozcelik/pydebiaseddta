@@ -146,6 +146,7 @@ class BoWDTA(Guide):
         train_ligands: List[str],
         train_proteins: List[str],
         train_labels: List[float],
+        **kwargs
     ):
         """Trains a BoWDTA model on the provided protein-ligand interactions.
         The biomolecules are represented as bag of their biomolecule words and a

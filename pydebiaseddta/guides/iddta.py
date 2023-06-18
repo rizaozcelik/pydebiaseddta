@@ -77,6 +77,7 @@ class IDDTA(Guide):
         train_ligands: List[str],
         train_proteins: List[str],
         train_labels: List[float],
+        **kwargs
     ):
         """Trains the IDDTA model. IDDTA represents the biomolecules with 
         one-hot-encoding of their identities and applies decision tree for affinity prediction.
