@@ -12,6 +12,7 @@ dependencies = [
     "numpy==1.21.2",
     "scikit_learn==1.1.1",
     "tensorflow==2.7.0",
+    "cudatoolkit==10.1",
     "tokenizers==0.10.3",
     "transformers==4.4.0",
     "pandas==1.4.4",
