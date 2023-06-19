@@ -124,7 +124,7 @@ class WordIdentifier:
         save_json(json.loads(self.tokenizer.to_str()), savepath)
 
 
-def load_chemical_word_identifier(vocab_size: int) -> WordIdentifier:
+def load_ligand_word_identifier(vocab_size: int) -> WordIdentifier:
     """A convenience function to load word vocabularies learned for SMILES strings in the study.
     The possible vocabularies to load are for DeepDTA and BPE-DTA. 
 
@@ -146,10 +146,10 @@ def load_chemical_word_identifier(vocab_size: int) -> WordIdentifier:
     if vocab_size not in [94, 8000]:
         raise ValueError("Supported vocab sizes are 94 and 8000")
 
-    protein_vocab_path = f"{package_path}/data/word_identification/chemical"
-    vocab_path = f"{protein_vocab_path}/chembl27_enc_94.json"
+    ligand_vocab_path = f"{package_path}/data/word_identification/ligand"
+    vocab_path = f"{ligand_vocab_path}/chembl27_enc_94.json"
     if vocab_size == 8000:
-        vocab_path = f"{protein_vocab_path}/chembl27_enc_bpe_8000.json"
+        vocab_path = f"{ligand_vocab_path}/chembl27_enc_bpe_8000.json"
 
     return WordIdentifier.from_file(vocab_path)
 
@@ -199,10 +199,10 @@ if __name__ == "__main__":
         raise ValueError("Tokenization broke the sequences")
 
     word_identifier.save(
-        f"{package_path}/data/word_identification/chemical_mini_test.json"
+        f"{package_path}/data/word_identification/ligand_mini_test.json"
     )
     loaded_identifier = WordIdentifier.from_file(
-        f"{package_path}/data/word_identification/chemical_mini_test.json"
+        f"{package_path}/data/word_identification/ligand_mini_test.json"
     )
 
     is_save_load_ok = (

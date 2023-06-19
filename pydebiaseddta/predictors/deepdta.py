@@ -4,11 +4,11 @@ from tensorflow.keras.layers import Conv1D, GlobalMaxPooling1D
 from tensorflow.keras.layers import Dense, Dropout, Concatenate
 from tensorflow.keras.layers import Input, Embedding
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam, SGD
 
 from .abstract_predictors import TFPredictor
 from ..sequence.word_identification import (
-    load_chemical_word_identifier,
+    load_ligand_word_identifier,
     load_protein_word_identifier,
 )
 from ..sequence.smiles_processing import (
@@ -29,6 +29,14 @@ class DeepDTA(TFPredictor):
         num_filters: int = 32,
         smi_filter_len: int = 4,
         prot_filter_len: int = 6,
+        early_stopping_metric: str = "mse",
+        early_stopping_metric_threshold: float = -1e6,
+        early_stopping_num_epochs: int = 0,
+        early_stopping_split: str = "train",
+        optimizer: str = "adam",
+        min_epochs: int = 0,
+        seed: int = 0,
+        **kwargs
     ):
         """Constructor to create a DeepDTA instance.
         DeepDTA segments SMILES strings of ligands and amino-acid sequences of proteins into characters,
@@ -57,6 +65,25 @@ class DeepDTA(TFPredictor):
             Length of filters in the convolution blocks for ligands, by default 4.
         prot_filter_len : int, optional
             Length of filters in the convolution blocks for proteins, by default 6.
+        early_stopping_metric : str, optional
+            Metric for early stopping of the training. Available options are "mse", "rmse", "mae", "r2", "ci".
+        early_stopping_metric_threshold : float, optional
+            If the performance in the specified metric in the specified split 
+            fall below this value the training is stopped early. Available options are
+            "mse" and "mae". Set to a negative value by default with no effects.
+        early_stopping_num_epochs : int, optional
+            If this value is set > 0, then if the training has not been better than the
+            best recorded performance for this many epochs on the specified split, the
+            training is stopped early. Set to 0 by default with no effect.
+        early_stopping_split:
+            The split for conducting early stopping checks. Available options are "train"
+            and the keys in the val_split dictionary.
+        optimizer : str, optional
+            The optimizer used in training. Available options are "adam" and "sgd".
+        min_epochs : int, optional
+            Initial number of epochs for which the early stopping computations will be overrided.
+        seed : int, optional
+            Seed for the initialized model.
         """    
         self.max_smi_len = max_smi_len
         self.max_prot_len = max_prot_len
@@ -65,9 +92,16 @@ class DeepDTA(TFPredictor):
         self.smi_filter_len = smi_filter_len
         self.prot_filter_len = prot_filter_len
 
+        self.optimizer = optimizer
+        self.early_stopping_metric = early_stopping_metric
+        self.early_stopping_metric_threshold = early_stopping_metric_threshold
+        self.early_stopping_num_epochs = early_stopping_num_epochs
+        self.early_stopping_split = early_stopping_split
+        self.min_epochs = min_epochs
+
         self.chem_vocab_size = 94
         self.prot_vocab_size = 26
-        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size)
+        TFPredictor.__init__(self, n_epochs, learning_rate, batch_size, seed=seed)
 
     def build(self):
         """Builds a `DeepDTA` predictor in `keras` with the parameters specified during construction.
@@ -80,7 +114,7 @@ class DeepDTA(TFPredictor):
         # Inputs
         ligands = Input(shape=(self.max_smi_len,), dtype="int32")
 
-        # chemical representation
+        # ligand representation
         ligand_representation = Embedding(
             input_dim=self.chem_vocab_size + 1,
             output_dim=self.embedding_dim,
@@ -153,7 +187,12 @@ class DeepDTA(TFPredictor):
         FC3 = Dense(512, activation="relu")(FC2)
         predictions = Dense(1, kernel_initializer="normal")(FC3)
 
-        opt = Adam(self.learning_rate)
+        if self.optimizer == "adam":
+            opt = Adam(self.learning_rate)
+        elif self.optimizer == "sgd":
+            opt = SGD(self.learning_rate)
+        else:
+            raise ValueError(f"The optimizer {self.optimizer} is not found.")
         deepdta = Model(inputs=[ligands, proteins], outputs=[predictions])
         deepdta.compile(
             optimizer=opt,
@@ -178,7 +217,7 @@ class DeepDTA(TFPredictor):
         """     
         smi_to_unichar_encoding = load_smiles_to_unichar_encoding()
         unichars = smiles_to_unichar_batch(ligands, smi_to_unichar_encoding)
-        word_identifier = load_chemical_word_identifier(vocab_size=94)
+        word_identifier = load_ligand_word_identifier(vocab_size=94)
 
         return np.array(
             word_identifier.encode_sequences(unichars, self.max_smi_len)
@@ -208,8 +247,6 @@ if __name__ == "__main__":
 
     from pydebiaseddta.utils import load_sample_dta_data
 
-    train_chemicals, train_proteins, train_labels = load_sample_dta_data(
-        mini=True
-    )["train"]
+    train_ligands, train_proteins, train_labels = load_sample_dta_data(mini=True, split="train")
     deepdta = DeepDTA(n_epochs=5)
-    deepdta.train(train_chemicals, train_proteins, train_labels)
+    deepdta.train(train_ligands, train_proteins, train_labels)

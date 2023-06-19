@@ -1,6 +1,6 @@
 [project]
 name = "pydebiaseddta"
-version="0.0.5"
+version="0.1.0"
 authors = [
     {name = "Rıza Özçelik", email = "riza.ozcelik@boun.edu.tr"}
 ]
@@ -13,7 +13,13 @@ dependencies = [
     "scikit_learn==1.1.1",
     "tensorflow==2.7.0",
     "tokenizers==0.10.3",
-    "transformers==4.14.1",
+    "transformers==4.4.0",
+    "pandas==1.4.4",
+    "ipykernel==6.15.2",
+    "protobuf==3.20.0",
+    "packaging==21.3",
+    "rdkit==2022.09.5",
+    "matplotlib==3.5.2"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
