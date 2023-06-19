@@ -16,7 +16,7 @@ We highly recommend the user to start their exploration with the Jupyter noteboo
 
 To interact with this file, open this file with an IDE that can read notebook files, such as VS Code or Jupyter Lab. In this program, you will have to select the interpreter as `debiaseddta`, corresponding to the name of the Anaconda environment you just installed. The cells of the notebook will onboard you to the main functionalities of the repository.
 
-To see examples of a broader range of functionalities, check the notebook file `examples/additional_use_cases.ipynb`. This notebook illustrates uses of various additional experiment settings.
+To see examples of a broader range of functionalities, check the notebook file `examples/additional_use_cases.ipynb`. This notebook illustrates uses of various additional experiment settings. This repository also includes the script `scripts/pydebiaseddta_experiment.py` that allows running experiments through command line with an appropriate config file.
 
 ### Additional Data
 The repository includes a small sample from the BDB dataset [2], which can be loaded using the function `pydebiaseddta.utils.load_sample_dta_data`. This allows the user to experiment with `pydebiaseddta`'s features without needing external data.
@@ -28,7 +28,7 @@ For users interested in experimenting with real datasets we make the full BDB [2
 If you use `pydebiaseddta` in your research, please consider citing:
 
 ```bibtex
-@article{ozccelik2022debiaseddta,
+@article{ozccelik2023debiaseddta,
     title={DebiasedDTA: DebiasedDTA: Improving the Generalizability of Drug-Target Affinity
 Prediction Models},
     author={{\"O}z{\c{c}}elik, R{\i}za and Ba{\u{g}}, Alperen and At{\i}l, Berk and Barsbey, Melih and {\"O}zg{\"u}r, Arzucan and {\"O}zk{\i}r{\i}ml{\i}, Elif},
