@@ -7,14 +7,14 @@ Repository for `pydebiaseddta`, Python implementation of the DebiasedDTA trainin
 ----------------
 The package can be installed using the \texttt{pip} package management system. Before installing the package, we highly recommend creation of a virtual environment with the appropriate Python version, using the Anaconda software framework:
 ```bash
-conda create --name debiaseddta python=3.9.7
-conda activate debiaseddta
+conda create --name pydebiaseddta python=3.9.7
+conda activate pydebiaseddta
 python3 -m pip install pydebiaseddta
 ```
 ### Quickstart
-We highly recommend the user to start their exploration with the Jupyter notebook file `examples/quickstart.ipynb`, which provides a practical yet comprehensive introduction to `pydebiaseddta`.
+We highly recommend the user to start their exploration with the Jupyter notebook file `examples/quickstart.ipynb`, which provides a practical yet comprehensive introduction to `pydebiaseddta`. You can view the contents of this notebook directly through this repository, or download it and run it on your machine.
 
-To interact with this file, open this file with an IDE that can read notebook files, such as VS Code or Jupyter Lab. In this program, you will have to select the interpreter as `debiaseddta`, corresponding to the name of the Anaconda environment you just installed. The cells of the notebook will onboard you to the main functionalities of the repository.
+To run this file, open it with an IDE that can read notebook files, such as VS Code or Jupyter Lab. In this program, you will have to select the interpreter as `pydebiaseddta`, corresponding to the name of the Anaconda environment you just installed. The cells of the notebook will onboard you to the main functionalities of the repository.
 
 To see examples of a broader range of functionalities, check the notebook file `examples/additional_use_cases.ipynb`. This notebook illustrates uses of various additional experiment settings. This repository also includes the script `scripts/pydebiaseddta_experiment.py` that allows running experiments through command line with an appropriate config file.
 
