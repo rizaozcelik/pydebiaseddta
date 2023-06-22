@@ -67,5 +67,5 @@ for split in test_splits.keys():
     test_ligands, test_proteins, test_labels = test_splits[split]
     test_preds = debiaseddta.predictor_instance.predict(test_ligands, test_proteins)
     results[split] = evaluate_predictions(test_labels, test_preds, metrics=["ci", "mse", "r2", "mae", "rmse"])    
-save_json(train_hist, config.results_save_folder + "/results.json")
+save_json(results, config.results_save_folder + "/results.json")
 print("Completed evaluation, saving results.")
