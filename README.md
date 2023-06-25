@@ -19,7 +19,7 @@ To run this file, open it with an IDE that can read notebook files, such as VS C
 To see examples of a broader range of functionalities, check the notebook file `examples/additional_use_cases.ipynb`. This notebook illustrates uses of various additional experiment settings. This repository also includes the script `scripts/pydebiaseddta_experiment.py` that allows running experiments through command line with an appropriate config file.
 
 ### Additional Data
-The repository includes a small sample from the BDB dataset [2], which can be loaded using the function `pydebiaseddta.utils.load_sample_dta_data`. This allows the user to experiment with `pydebiaseddta`'s features without needing external data.
+The repository includes a small sample from the KIBA dataset [3], which can be loaded using the function `pydebiaseddta.utils.load_sample_dta_data`. This allows the user to experiment with `pydebiaseddta`'s features without needing external data.
 
 For users interested in experimenting with real datasets we make the full BDB [2] and KIBA [3] datasets available to download from the following [link](https://drive.google.com/drive/folders/1ihpWgYqugjEKEN9ceyTKCIQxpp1DP_XS?usp=drive_link). The datasets have been separated into splits called `train`, `test_warm`, `test_cold_prot`, `test_cold_lig`, and `test_cold_both`. The various test splits serve to test algorithm performance in novel proteins, novel ligands, and both novel proteins and ligands. Validation counterparts of the test splits have also been provided for model selection. Five different random splits have been provided to allow the user to assess the effect of randomization on results.
 
